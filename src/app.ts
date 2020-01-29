@@ -1,3 +1,4 @@
+import { autoinject } from 'aurelia-framework';
 import {
   MiddlewarePlacement,
   Store,
@@ -9,6 +10,7 @@ import * as LogManager from 'aurelia-logging';
 import {State} from './store/state';
 import { isOffline, isOnline } from 'store/actions';
 
+@autoinject()
 export class App {
   private logger = LogManager.getLogger('au-pwa-demo:app');
   private readonly onOffline: () => void;
@@ -17,6 +19,9 @@ export class App {
   public message: string = 'Hello World!';
 
   constructor (private store: Store<State>) {
+    this.store.registerAction(isOffline.name, isOffline);
+    this.store.registerAction(isOnline.name, isOnline);
+
     this.onOffline = () => this.store.dispatch(isOffline.name);
     this.onOnline = () => this.store.dispatch(isOnline.name);
   }
