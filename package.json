@@ -10,6 +10,7 @@
   "dependencies": {
     "aurelia-animator-css": "^1.0.4",
     "aurelia-bootstrapper": "^2.3.3",
+    "aurelia-store": "^1.5.0",
     "serviceworker-webpack-plugin": "^1.0.1"
   },
   "devDependencies": {
