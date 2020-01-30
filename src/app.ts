@@ -22,7 +22,9 @@ export class App {
     this.store.registerAction(isOffline.name, isOffline);
     this.store.registerAction(isOnline.name, isOnline);
 
-    this.onOffline = () => this.store.dispatch(isOffline.name);
+    this.onOffline = () => {
+      this.store.dispatch(isOffline.name);
+    };
     this.onOnline = () => this.store.dispatch(isOnline.name);
   }
  
