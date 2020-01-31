@@ -1,8 +1,14 @@
 /* eslint-global-variables serviceWorkerOption */
 
-// Constants from src/constants.ts will be imported here.
-
-import { VERSION } from 'src/constants';
+const DEFAULT_CATEGORY = 'unread';
+const DYNAMIC_DB_NAME = 'aurss';
+const DYNAMIC_DB_SCHEMA_VERSION = 1;
+// In ms.
+const REFRESH_INTERVAL = 30 * 60 * 1000;
+const STATE_STORAGE_KEY = 'aurss-storage';
+const TTRSS_ACTIONS_STORAGE_NAME = 'ttrss-actions';
+// This is used by the ServiceWorker.
+const VERSION = '1.0.0';
 
 const staticCachePrefix = 'static';
 const staticCacheName = `${staticCachePrefix}-${VERSION}`;
