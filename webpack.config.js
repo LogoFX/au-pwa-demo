@@ -1,4 +1,5 @@
 const path = require('path');
+const fs = require('fs');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
@@ -230,6 +231,16 @@ module.exports = ({ production } = {}, {extractCss, analyze, tests, hmr, port, h
     new ServiceWorkerWebpackPlugin({
       entry: './src/sw.js',
       minimize: production,
+      template: () => {
+        const constantsFile = fs.readFileSync('./src/constants.ts').toString();
+        const constants = constantsFile.split('\n')
+          .filter(line => !!line)
+          .map(line => line.replace(/^export /, ''))
+          .join('\n');
+        const idbFile = fs.readFileSync('./node_modules/idb/build/iife/index-min.js').toString();
+
+        return Promise.resolve(idbFile + '\n\n' + constants);
+      },      
     }),    
     // ref: https://webpack.js.org/plugins/mini-css-extract-plugin/
     ...when(extractCss, new MiniCssExtractPlugin({ // updated to match the naming conventions for the js files
