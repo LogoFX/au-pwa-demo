@@ -18,14 +18,21 @@ export class App {
 
   public message: string = 'Hello World!';
 
+  public isOnline: boolean;
+
   constructor (private store: Store<State>) {
     this.store.registerAction(isOffline.name, isOffline);
     this.store.registerAction(isOnline.name, isOnline);
 
     this.onOffline = () => {
       this.store.dispatch(isOffline.name);
+      this.isOnline = false;
     };
-    this.onOnline = () => this.store.dispatch(isOnline.name);
+
+    this.onOnline = () => {
+      this.store.dispatch(isOnline.name);
+      this.isOnline = true;
+    }
   }
  
   public attached() {
@@ -44,6 +51,8 @@ export class App {
     } else {
         this.store.dispatch(isOnline.name);
     }
+
+    this.isOnline = navigator.onLine;
 
     window.addEventListener('offline', this.onOffline);
     window.addEventListener('online', this.onOnline);

@@ -1,3 +1,5 @@
 <template>
   <h1>${message}</h1>
+  <h2 if.bind="isOnline">Application is ONLINE!</h2>
+  <h2 if.bind="!isOnline">Application is OFFLINE!</h2>
 </template>
