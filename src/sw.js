@@ -54,37 +54,11 @@ self.addEventListener('sync', (event) => {
     log('Synching ttrss actions');
 
     event.waitUntil(
-        syncTTRSSActions()
+      syncActions()
     );
 });
 
 
-function syncTTRSSActions() {
-    const processedActionIds = [];
-
-    return idb.openDB(DYNAMIC_DB_NAME, DYNAMIC_DB_SCHEMA_VERSION)
-        .then((db) => {
-            const tx = db.transaction(TTRSS_ACTIONS_STORAGE_NAME);
-            return tx.store.getAll();
-        })
-        .then((actions) => {
-            const fetchActions = actions.map((action) => {
-                    return fetchFromAction(action).then(
-                        () => processedActionIds.push(action.id),
-                        () => log(`Failed to process ${action.id}`),
-                    );
-                },
-            );
-            return Promise.all(fetchActions);
-        })
-        .then(() => idb.openDB(DYNAMIC_DB_NAME, DYNAMIC_DB_SCHEMA_VERSION))
-        .then((db) => {
-            const deleteRequests = processedActionIds.map((id) => db.delete(TTRSS_ACTIONS_STORAGE_NAME, id));
-            return Promise.all(deleteRequests);
-        })
-        .catch((error) => log('Failed to sync', error));
-}
-
-function fetchFromAction(action) {
-    return fetch(action.url, action.payload);
-}
+function syncActions() {
+  //TODO: Add sync code here
+ }
