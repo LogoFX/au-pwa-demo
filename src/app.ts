@@ -1,6 +1,9 @@
+import { PLATFORM } from 'aurelia-pal';
 import { autoinject } from 'aurelia-framework';
 import runtime from 'serviceworker-webpack-plugin/lib/runtime';
 import * as LogManager from 'aurelia-logging';
+import {Router, RouterConfiguration} from 'aurelia-router';
+import { HttpResponseMessage } from "aurelia-http-client";
 
 @autoinject()
 export class App {
@@ -22,6 +25,59 @@ export class App {
       this.isOnline = true;
     }
   }
+
+  public async configureRouter(config: RouterConfiguration, router: Router): Promise<void> {
+    //config.title = "MKT Media Stats - Dashboard";
+
+    //this.showSpiner = true;
+
+    try {
+      //await this.dataService.getHeatmapPrismList();
+      //await this.dataService.getRiskPrismList();
+    } catch (error) {
+      if (error instanceof HttpResponseMessage) {
+        alert(error.content);
+      }
+      //this.snackbarService.show(error);
+    } finally {
+      //this.showSpiner = false;
+    }
+
+    //this._prismSettings = { icon: "find_replace", subMenu:  this.prisms, isOpen: false };
+    //this._riskPrismSettings = { icon: "find_replace", subMenu:  this.riskPrisms, isOpen: false };
+
+    config.map([
+      {
+        route: "explore/:id?",
+        name: "explore",
+        moduleId: PLATFORM.moduleName("explore"),
+        settings: { icon: "bubble_chart" }
+      },
+      {
+        route: ["explore/0", "explore/:id?", ""],
+        moduleId: PLATFORM.moduleName("explore"),
+        nav: true,
+        title: "Explore",
+        //settings: this._prismSettings
+      },
+      {
+        route: "build",
+        name: "Build",
+        moduleId: PLATFORM.moduleName("build"),
+        nav: true,
+        title: "Build",
+        settings: { icon: "call_merge" }
+      },
+      {
+        route: "invest",
+        name: "Invest",
+        moduleId: PLATFORM.moduleName("invest"),
+        nav: true,
+        title: "invest",
+        settings: { icon: "input" }
+      },
+    ]);
+  }  
  
   public attached() {
     this.setUpOfflineNotification();

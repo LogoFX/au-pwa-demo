@@ -31,6 +31,7 @@ self.addEventListener('activate', (event) => {
 });
 
 self.addEventListener('fetch', (event) => {
+  log('fetch', event);
     // Let the browser do its default thing
     // for non-GET requests.
     if (event.request.method !== 'GET') {
