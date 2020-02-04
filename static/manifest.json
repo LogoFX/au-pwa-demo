@@ -11,11 +11,11 @@
   "lang": "en-US",
   "orientation": "portrait-primary",
   "icons": [{
-      "src": "/icons/aurss.96x96.png",
+      "src": "/icons/mkt_96x96.png",
       "type": "image/png",
       "sizes": "96x96"
   }, {
-      "src": "/icons/aurss.512x512.png",
+      "src": "/icons/mkt_512x512.png",
       "type": "image/png",
       "sizes": "512x512"
   }]
