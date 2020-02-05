@@ -1,6 +1,6 @@
 import { HeatmapDto, FilterScopeDto, LineChartDto, PrismDefinitionDto } from "data";
 
-export interface IHeatmapProvider {
+export interface IExploreProvider {
 
   getPrismDefinitionList(): Promise<PrismDefinitionDto[]>;
 
