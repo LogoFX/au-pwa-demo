@@ -1,14 +1,10 @@
-import { HeatmapDto, FilterScopeDto, LineChartDto, PrismDefinitionDto } from "data";
+import { HeatmapDto, PrismDefinitionDto } from "data";
 
 export interface IExploreProvider {
 
   getPrismDefinitionList(): Promise<PrismDefinitionDto[]>;
 
-  getHeatmap(prismId: string, filter: FilterScopeDto): Promise<HeatmapDto>;
+  getHeatmap(prismId: string): Promise<HeatmapDto>;
 
-  getLineChartData(prismId: string, filter: FilterScopeDto, theme?: string, column?: string): Promise<LineChartDto[]>;
-
-  downloadHeatmap(prismId: string, filter: FilterScopeDto): Promise<string>;
-
-  downloadLineChartData(prismId: string, indicatorValue: string, reservoir: string, topic?: string, symbol?: string): Promise<string>;
+  downloadHeatmap(prismId: string): Promise<string>;
 }
