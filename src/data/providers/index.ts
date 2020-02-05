@@ -1,2 +1,2 @@
 export * from './contracts';
-//export * from './implementation';
+export * from './implementation';
