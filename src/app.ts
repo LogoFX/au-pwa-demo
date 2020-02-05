@@ -7,9 +7,12 @@ import { HttpResponseMessage } from "aurelia-http-client";
 
 @autoinject()
 export class App {
+ 
   private logger = LogManager.getLogger('au-pwa-demo:app');
   private readonly onOffline: () => void;
   private readonly onOnline: () => void;
+
+  public router: Router;
 
   public message: string = 'Hello World!';
 
@@ -27,6 +30,7 @@ export class App {
   }
 
   public async configureRouter(config: RouterConfiguration, router: Router): Promise<void> {
+    this.router = router;
     //config.title = "MKT Media Stats - Dashboard";
 
     //this.showSpiner = true;

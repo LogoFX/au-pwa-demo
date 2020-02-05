@@ -1,5 +1,53 @@
 <template>
-  <h1>${message}</h1>
+  <!-- <h1>${message}</h1>
   <h2 if.bind="isOnline">Application is ONLINE!</h2>
-  <h2 if.bind="!isOnline">Application is OFFLINE!</h2>
+  <h2 if.bind="!isOnline">Application is OFFLINE!</h2> -->
+
+  <header class="mdc-top-app-bar app-bar  mdc-elevation--z4" id="app-bar">
+    <div class="mdc-top-app-bar__row">
+        <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
+          <!-- <button class="mdc-icon-button material-icons mdc-top-app-bar__navigation-icon mdc-ripple" data-mdc-ripple-is-unbounded="true">menu</button> -->
+          <div class="mdc-develop-toolbar__leading-icon">
+            <img src="../static/logo.png" width="164px">
+          </div>
+        </section>
+
+        <!-- <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end" role="toolbar">
+          <button class="material-icons mdc-top-app-bar__action-item mdc-icon-button mdc-ripple"
+                  data-mdc-ripple-is-unbounded="true" aria-label="Download"
+           click.delegate="logout()">power_settings_new</button>
+        </section> -->
+      </div>
+  </header>
+
+  <aside class="mdc-drawer mdc-drawer--dismissible mdc-drawer--open mdc-top-app-bar--fixed-adjust">
+    <div class="mdc-drawer__content">
+        <ul class="crypto-navigation__list">
+          <li repeat.for="nav of router.navigation" class="dropdown-list crypto-navigation__list-item ${nav.isActive ? 'crypto-navigation__list-item--active' : ''}">
+            <a href.bind="nav.href" dropdown-prop="title" class="mdc-ripple-surface ${nav.settings.subMenu ? 'list-item-open' : ''}">
+              <i class="material-icons crypto-navigation__list-item__icon" aria-hidden="true">${nav.settings.icon}</i>
+              <span class="crypto-navigation__list-item__label mdc-theme--on-surface mdc-typography--overline">
+                ${nav.title}
+              </span>
+              <i if.bind="nav.settings.subMenu" class="material-icons crypto-navigation__list-item__icon crypto-navigation__list-item__icon__arrow">expand_more</i>
+            </a>
+            <ul if.bind="nav.settings.subMenu" class="dropdown-list-items ${nav.settings.isOpen?'dropdown-list-open':''}">
+              <li repeat.for="prism of nav.settings.subMenu" style=" height: 30px;" class="crypto-navigation__list-item mdc-ripple-surface ${((prism.prismDefinition.id === selectedId) && nav.isActive) ? 'crypto-navigation__list-item--active' : ''}">
+                <a href="#/${prism.routeName}/${prism.prismDefinition.id}">
+                  <i class="material-icons crypto-navigation__list-item__icon" aria-hidden="true">show_chart</i>
+                  <span title="${prism.title}" class="crypto-navigation__list-item__label mdc-theme--on-surface mdc-typography--overline">${prism.shortName}</span>
+                </a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+    </div>
+  </aside>
+
+  <div class="mdc-drawer-app-content mdc-top-app-bar--fixed-adjust">
+    <main class="main-content" id="main-content">
+      <router-view></router-view>
+    </main>
+  </div>
+
 </template>
