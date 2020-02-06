@@ -3,6 +3,7 @@ import { PLATFORM } from 'aurelia-pal';
 
 export * from './dto';
 export * from './providers';
+export * from './heatmap-slice-type';
 
 export function configure(config: FrameworkConfiguration): void {
   config.aurelia.use
