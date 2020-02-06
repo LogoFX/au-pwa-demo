@@ -1,0 +1,848 @@
+[
+  {
+    "filters": {
+      "id": "1",
+      "items": [
+        {
+          "default-value": "FX",
+          "id": "Reservoir",
+          "name": "Reservoir",
+          "options": [
+            {
+              "id": "FX",
+              "name": "FX",
+              "type": "string",
+              "value": "FX"
+            },
+            {
+              "id": "CEI",
+              "name": "CEI",
+              "type": "string",
+              "value": "CEI"
+            },
+            {
+              "id": "Sector",
+              "name": "Sector",
+              "type": "string",
+              "value": "Sector"
+            }
+          ],
+          "type": "Drop Down"
+        },
+        {
+          "default-value": "Intensity",
+          "id": "Measure",
+          "name": "Measure",
+          "options": [
+            {
+              "id": "Intensity",
+              "name": "Intensity",
+              "type": "string",
+              "value": "Intensity"
+            },
+            {
+              "id": "Trend",
+              "name": "Trend",
+              "type": "string",
+              "value": "Trend"
+            }
+          ],
+          "type": "Drop Down"
+        },
+        {
+          "default-value": "7-Day",
+          "id": "Time Resolution",
+          "name": "Time Resolution",
+          "options": [
+            {
+              "id": "7-Day",
+              "name": "7-Day",
+              "type": "string",
+              "value": "7-Day"
+            },
+            {
+              "id": "365-Day",
+              "name": "365-Day",
+              "type": "string",
+              "value": "365-Day"
+            },
+            {
+              "id": "182-Day",
+              "name": "182-Day",
+              "type": "string",
+              "value": "182-Day"
+            },
+            {
+              "id": "90-Day",
+              "name": "90-Day",
+              "type": "string",
+              "value": "90-Day"
+            },
+            {
+              "id": "60-Day",
+              "name": "60-Day",
+              "type": "string",
+              "value": "60-Day"
+            },
+            {
+              "id": "30-Day",
+              "name": "30-Day",
+              "type": "string",
+              "value": "30-Day"
+            }
+          ],
+          "type": "Drop Down"
+        },
+        {
+          "default-value": "2020/02/05",
+          "id": "Date",
+          "name": "Date",
+          "options": [
+            {
+              "id": "2020/02/05",
+              "name": "2020/02/05",
+              "type": "date",
+              "value": "2020/02/05"
+            }
+          ],
+          "type": "Calendar"
+        }
+      ]
+    },
+    "heatmap": {
+      "data-source-uri": "/topics-matrix/all/{reservoir}/{measure}/{time-resolution}",
+      "id": "Topics Heatmap",
+      "name": "Topics Heatmap",
+      "related-data": [
+        {
+          "heatmap-slice": "topic",
+          "items": [
+            {
+              "indicator-value": "Intensity",
+              "title": "{Topic} Intensity"
+            },
+            {
+              "indicator-value": "ExcessSentiment",
+              "title": "{Topic} Excess-Sentiment"
+            }
+          ]
+        },
+        {
+          "heatmap-slice": "symbol",
+          "items": []
+        },
+        {
+          "heatmap-slice": "value",
+          "items": [
+            {
+              "indicator-value": "Intensity",
+              "title": "{Topic-Symbol} Intensity"
+            },
+            {
+              "indicator-value": "ExcessSentiment",
+              "title": "{Topic-Symbol} Excess-Sentiment"
+            }
+          ]
+        }
+      ]
+    },
+    "id": "Topics",
+    "name": "Topics"
+  },
+  {
+    "filters": {
+      "id": "1",
+      "items": [
+        {
+          "default-value": "FX",
+          "id": "Reservoir",
+          "name": "Reservoir",
+          "options": [
+            {
+              "id": "FX",
+              "name": "FX",
+              "type": "string",
+              "value": "FX"
+            }
+          ],
+          "type": "Drop Down"
+        },
+        {
+          "default-value": "Intensity",
+          "id": "Measure",
+          "name": "Measure",
+          "options": [
+            {
+              "id": "Intensity",
+              "name": "Intensity",
+              "type": "string",
+              "value": "Intensity"
+            },
+            {
+              "id": "Trend",
+              "name": "Trend",
+              "type": "string",
+              "value": "Trend"
+            }
+          ],
+          "type": "Drop Down"
+        },
+        {
+          "default-value": "7-Day",
+          "id": "Time Resolution",
+          "name": "Time Resolution",
+          "options": [
+            {
+              "id": "7-Day",
+              "name": "7-Day",
+              "type": "string",
+              "value": "7-Day"
+            },
+            {
+              "id": "365-Day",
+              "name": "365-Day",
+              "type": "string",
+              "value": "365-Day"
+            },
+            {
+              "id": "182-Day",
+              "name": "182-Day",
+              "type": "string",
+              "value": "182-Day"
+            },
+            {
+              "id": "90-Day",
+              "name": "90-Day",
+              "type": "string",
+              "value": "90-Day"
+            },
+            {
+              "id": "60-Day",
+              "name": "60-Day",
+              "type": "string",
+              "value": "60-Day"
+            },
+            {
+              "id": "30-Day",
+              "name": "30-Day",
+              "type": "string",
+              "value": "30-Day"
+            }
+          ],
+          "type": "Drop Down"
+        },
+        {
+          "default-value": "2020/02/05",
+          "id": "Date",
+          "name": "Date",
+          "options": [
+            {
+              "id": "2020/02/05",
+              "name": "2020/02/05",
+              "type": "date",
+              "value": "2020/02/05"
+            }
+          ],
+          "type": "Calendar"
+        }
+      ]
+    },
+    "heatmap": {
+      "data-source-uri": "/topics-matrix/fx/{reservoir}/{measure}/{time-resolution}",
+      "id": "FX Heatmap",
+      "name": "FX Heatmap",
+      "related-data": [
+        {
+          "heatmap-slice": "topic",
+          "items": [
+            {
+              "indicator-value": "Intensity",
+              "title": "{Topic} Intensity"
+            },
+            {
+              "indicator-value": "ExcessSentiment",
+              "title": "{Topic} Excess-Sentiment"
+            }
+          ]
+        },
+        {
+          "heatmap-slice": "symbol",
+          "items": []
+        },
+        {
+          "heatmap-slice": "value",
+          "items": [
+            {
+              "indicator-value": "Intensity",
+              "title": "{Topic-Symbol} Intensity"
+            },
+            {
+              "indicator-value": "ExcessSentiment",
+              "title": "{Topic-Symbol} Excess-Sentiment"
+            }
+          ]
+        }
+      ]
+    },
+    "id": "FX",
+    "name": "FX"
+  },
+  {
+    "filters": {
+      "id": "1",
+      "items": [
+        {
+          "default-value": "FX",
+          "id": "Reservoir",
+          "name": "Reservoir",
+          "options": [
+            {
+              "id": "FX",
+              "name": "FX",
+              "type": "string",
+              "value": "FX"
+            }
+          ],
+          "type": "Drop Down"
+        },
+        {
+          "default-value": "Intensity",
+          "id": "Measure",
+          "name": "Measure",
+          "options": [
+            {
+              "id": "Intensity",
+              "name": "Intensity",
+              "type": "string",
+              "value": "Intensity"
+            },
+            {
+              "id": "Trend",
+              "name": "Trend",
+              "type": "string",
+              "value": "Trend"
+            }
+          ],
+          "type": "Drop Down"
+        },
+        {
+          "default-value": "7-Day",
+          "id": "Time Resolution",
+          "name": "Time Resolution",
+          "options": [
+            {
+              "id": "7-Day",
+              "name": "7-Day",
+              "type": "string",
+              "value": "7-Day"
+            },
+            {
+              "id": "365-Day",
+              "name": "365-Day",
+              "type": "string",
+              "value": "365-Day"
+            },
+            {
+              "id": "182-Day",
+              "name": "182-Day",
+              "type": "string",
+              "value": "182-Day"
+            },
+            {
+              "id": "90-Day",
+              "name": "90-Day",
+              "type": "string",
+              "value": "90-Day"
+            },
+            {
+              "id": "60-Day",
+              "name": "60-Day",
+              "type": "string",
+              "value": "60-Day"
+            },
+            {
+              "id": "30-Day",
+              "name": "30-Day",
+              "type": "string",
+              "value": "30-Day"
+            }
+          ],
+          "type": "Drop Down"
+        },
+        {
+          "default-value": "2020/02/05",
+          "id": "Date",
+          "name": "Date",
+          "options": [
+            {
+              "id": "2020/02/05",
+              "name": "2020/02/05",
+              "type": "date",
+              "value": "2020/02/05"
+            }
+          ],
+          "type": "Calendar"
+        }
+      ]
+    },
+    "heatmap": {
+      "data-source-uri": "/topics-matrix/banks/{reservoir}/{measure}/{time-resolution}",
+      "id": "Banks Heatmap",
+      "name": "Banks Heatmap",
+      "related-data": [
+        {
+          "heatmap-slice": "topic",
+          "items": [
+            {
+              "indicator-value": "HawkishDovish",
+              "title": "{Topic} Hawkish-Dovish"
+            },
+            {
+              "indicator-value": "Intensity",
+              "title": "{Topic} Intensity"
+            },
+            {
+              "indicator-value": "ExcessSentiment",
+              "title": "{Topic} Excess-Sentiment"
+            }
+          ]
+        },
+        {
+          "heatmap-slice": "symbol",
+          "items": [
+            {
+              "indicator-value": "Intensity",
+              "title": "{Symbol}"
+            }
+          ]
+        },
+        {
+          "heatmap-slice": "value",
+          "items": [
+            {
+              "indicator-value": "Intensity",
+              "title": "{Topic-Symbol} Intensity"
+            }
+          ]
+        }
+      ]
+    },
+    "id": "Banks",
+    "name": "Banks"
+  },
+  {
+    "filters": {
+      "id": "1",
+      "items": [
+        {
+          "default-value": "General",
+          "id": "Reservoir",
+          "name": "Reservoir",
+          "options": [
+            {
+              "id": "General",
+              "name": "General",
+              "type": "string",
+              "value": "General"
+            }
+          ],
+          "type": "Drop Down"
+        },
+        {
+          "default-value": "Intensity",
+          "id": "Measure",
+          "name": "Measure",
+          "options": [
+            {
+              "id": "Intensity",
+              "name": "Intensity",
+              "type": "string",
+              "value": "Intensity"
+            },
+            {
+              "id": "Trend",
+              "name": "Trend",
+              "type": "string",
+              "value": "Trend"
+            }
+          ],
+          "type": "Drop Down"
+        },
+        {
+          "default-value": "7-Day",
+          "id": "Time Resolution",
+          "name": "Time Resolution",
+          "options": [
+            {
+              "id": "7-Day",
+              "name": "7-Day",
+              "type": "string",
+              "value": "7-Day"
+            },
+            {
+              "id": "365-Day",
+              "name": "365-Day",
+              "type": "string",
+              "value": "365-Day"
+            },
+            {
+              "id": "182-Day",
+              "name": "182-Day",
+              "type": "string",
+              "value": "182-Day"
+            },
+            {
+              "id": "90-Day",
+              "name": "90-Day",
+              "type": "string",
+              "value": "90-Day"
+            },
+            {
+              "id": "60-Day",
+              "name": "60-Day",
+              "type": "string",
+              "value": "60-Day"
+            },
+            {
+              "id": "30-Day",
+              "name": "30-Day",
+              "type": "string",
+              "value": "30-Day"
+            }
+          ],
+          "type": "Drop Down"
+        },
+        {
+          "default-value": "2020/02/05",
+          "id": "Date",
+          "name": "Date",
+          "options": [
+            {
+              "id": "2020/02/05",
+              "name": "2020/02/05",
+              "type": "date",
+              "value": "2020/02/05"
+            }
+          ],
+          "type": "Calendar"
+        }
+      ]
+    },
+    "heatmap": {
+      "data-source-uri": "/topics-matrix/candidates/{reservoir}/{measure}/{time-resolution}",
+      "id": "Candidates Heatmap",
+      "name": "Candidates Heatmap",
+      "related-data": [
+        {
+          "heatmap-slice": "topic",
+          "items": [
+            {
+              "indicator-value": "Intensity",
+              "title": "{Topic} Intensity"
+            },
+            {
+              "indicator-value": "ExcessSentiment",
+              "title": "{Topic} Excess-Sentiment"
+            }
+          ]
+        },
+        {
+          "heatmap-slice": "symbol",
+          "items": [
+            {
+              "indicator-value": "Intensity",
+              "title": "{Symbol}"
+            }
+          ]
+        },
+        {
+          "heatmap-slice": "value",
+          "items": [
+            {
+              "indicator-value": "Intensity",
+              "title": "{Symbol} Intensity"
+            }
+          ]
+        }
+      ]
+    },
+    "id": "Candidates",
+    "name": "Candidates"
+  },
+  {
+    "filters": {
+      "id": "1",
+      "items": [
+        {
+          "default-value": "MediaChannel",
+          "id": "Reservoir",
+          "name": "Reservoir",
+          "options": [
+            {
+              "id": "MediaChannel",
+              "name": "MediaChannel",
+              "type": "string",
+              "value": "MediaChannel"
+            }
+          ],
+          "type": "Drop Down"
+        },
+        {
+          "default-value": "Intensity",
+          "id": "Measure",
+          "name": "Measure",
+          "options": [
+            {
+              "id": "Intensity",
+              "name": "Intensity",
+              "type": "string",
+              "value": "Intensity"
+            },
+            {
+              "id": "Trend",
+              "name": "Trend",
+              "type": "string",
+              "value": "Trend"
+            }
+          ],
+          "type": "Drop Down"
+        },
+        {
+          "default-value": "7-Day",
+          "id": "Time Resolution",
+          "name": "Time Resolution",
+          "options": [
+            {
+              "id": "7-Day",
+              "name": "7-Day",
+              "type": "string",
+              "value": "7-Day"
+            },
+            {
+              "id": "365-Day",
+              "name": "365-Day",
+              "type": "string",
+              "value": "365-Day"
+            },
+            {
+              "id": "182-Day",
+              "name": "182-Day",
+              "type": "string",
+              "value": "182-Day"
+            },
+            {
+              "id": "90-Day",
+              "name": "90-Day",
+              "type": "string",
+              "value": "90-Day"
+            },
+            {
+              "id": "60-Day",
+              "name": "60-Day",
+              "type": "string",
+              "value": "60-Day"
+            },
+            {
+              "id": "30-Day",
+              "name": "30-Day",
+              "type": "string",
+              "value": "30-Day"
+            }
+          ],
+          "type": "Drop Down"
+        },
+        {
+          "default-value": "2020/02/05",
+          "id": "Date",
+          "name": "Date",
+          "options": [
+            {
+              "id": "2020/02/05",
+              "name": "2020/02/05",
+              "type": "date",
+              "value": "2020/02/05"
+            }
+          ],
+          "type": "Calendar"
+        }
+      ]
+    },
+    "heatmap": {
+      "data-source-uri": "/topics-matrix/fx/{reservoir}/{measure}/{time-resolution}",
+      "id": "Reservoirs Heatmap",
+      "name": "Reservoirs Heatmap",
+      "related-data": [
+        {
+          "heatmap-slice": "topic",
+          "items": [
+            {
+              "indicator-value": "Intensity",
+              "title": "{Topic} Intensity"
+            },
+            {
+              "indicator-value": "ExcessSentiment",
+              "title": "{Topic} Excess-Sentiment"
+            }
+          ]
+        },
+        {
+          "heatmap-slice": "symbol",
+          "items": []
+        },
+        {
+          "heatmap-slice": "value",
+          "items": [
+            {
+              "indicator-value": "Intensity",
+              "title": "{Topic-Symbol} Intensity"
+            },
+            {
+              "indicator-value": "ExcessSentiment",
+              "title": "{Topic-Symbol} Excess-Sentiment"
+            }
+          ]
+        }
+      ]
+    },
+    "id": "Reservoirs",
+    "name": "Reservoirs"
+  },
+  {
+    "filters": {
+      "id": "1",
+      "items": [
+        {
+          "default-value": "MediaChannel",
+          "id": "Reservoir",
+          "name": "Reservoir",
+          "options": [
+            {
+              "id": "MediaChannel",
+              "name": "MediaChannel",
+              "type": "string",
+              "value": "MediaChannel"
+            }
+          ],
+          "type": "Drop Down"
+        },
+        {
+          "default-value": "Intensity",
+          "id": "Measure",
+          "name": "Measure",
+          "options": [
+            {
+              "id": "Intensity",
+              "name": "Intensity",
+              "type": "string",
+              "value": "Intensity"
+            },
+            {
+              "id": "Trend",
+              "name": "Trend",
+              "type": "string",
+              "value": "Trend"
+            }
+          ],
+          "type": "Drop Down"
+        },
+        {
+          "default-value": "7-Day",
+          "id": "Time Resolution",
+          "name": "Time Resolution",
+          "options": [
+            {
+              "id": "7-Day",
+              "name": "7-Day",
+              "type": "string",
+              "value": "7-Day"
+            },
+            {
+              "id": "365-Day",
+              "name": "365-Day",
+              "type": "string",
+              "value": "365-Day"
+            },
+            {
+              "id": "182-Day",
+              "name": "182-Day",
+              "type": "string",
+              "value": "182-Day"
+            },
+            {
+              "id": "90-Day",
+              "name": "90-Day",
+              "type": "string",
+              "value": "90-Day"
+            },
+            {
+              "id": "60-Day",
+              "name": "60-Day",
+              "type": "string",
+              "value": "60-Day"
+            },
+            {
+              "id": "30-Day",
+              "name": "30-Day",
+              "type": "string",
+              "value": "30-Day"
+            }
+          ],
+          "type": "Drop Down"
+        },
+        {
+          "default-value": "2020/02/05",
+          "id": "Date",
+          "name": "Date",
+          "options": [
+            {
+              "id": "2020/02/05",
+              "name": "2020/02/05",
+              "type": "date",
+              "value": "2020/02/05"
+            }
+          ],
+          "type": "Calendar"
+        }
+      ]
+    },
+    "heatmap": {
+      "data-source-uri": "/topics-matrix/fx/{reservoir}/{measure}/{time-resolution}",
+      "id": "Factors Heatmap",
+      "name": "Factors Heatmap",
+      "related-data": [
+        {
+          "heatmap-slice": "topic",
+          "items": [
+            {
+              "indicator-value": "Intensity",
+              "title": "{Topic} Intensity"
+            },
+            {
+              "indicator-value": "ExcessSentiment",
+              "title": "{Topic} Excess-Sentiment"
+            }
+          ]
+        },
+        {
+          "heatmap-slice": "symbol",
+          "items": []
+        },
+        {
+          "heatmap-slice": "value",
+          "items": [
+            {
+              "indicator-value": "Intensity",
+              "title": "{Topic-Symbol} Intensity"
+            },
+            {
+              "indicator-value": "ExcessSentiment",
+              "title": "{Topic-Symbol} Excess-Sentiment"
+            }
+          ]
+        }
+      ]
+    },
+    "id": "Factors",
+    "name": "Factors"
+  }
+]
