@@ -9,7 +9,7 @@ import { PrismDefinition, HeatmapDefinition, RelatedData, RelatedDataItem } from
 @autoinject
 export class DataService implements IDataService {
   
-  public heatmapPrismList: IPrismDefinition[];  riskPrismList: IPrismDefinition[];
+  public heatmapPrismList: IPrismDefinition[];
 
   // tslint:disable: no-parameter-properties
   constructor(private heatmapProvider: HeatmapProvider) {
