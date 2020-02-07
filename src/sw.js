@@ -31,7 +31,16 @@ self.addEventListener('activate', (event) => {
 });
 
 self.addEventListener('fetch', (event) => {
-    log('fetch', event);
+  var config = {
+      staticCacheItems: [
+        '/images/lyza.gif',
+        '/css/styles.css',
+        '/js/site.js',
+        '/offline/',
+        '/'
+        ],
+      cachePathPattern: /^\/(?:(20[0-9]{2}|about|blog|css|images|js)\/(.+)?)?$/
+    };
 
     function shouldHandleFetch (event, opts) {
       var request            = event.request;
@@ -53,6 +62,20 @@ self.addEventListener('fetch', (event) => {
   
 
     function onFetch (event, opts) {
+      var request      = event.request;
+      var acceptHeader = request.headers.get('Accept');
+      var resourceType = 'static';
+      var cacheKey;
+    
+      if (acceptHeader.indexOf('text/html') !== -1) {
+        resourceType = 'content';
+      } else if (acceptHeader.indexOf('image') !== -1) {
+        resourceType = 'image';
+      }
+    
+      // {String} [static|image|content]
+      cacheKey = resourceType;
+
       // 1. Determine what kind of asset this is… (above).
       if (resourceType === 'content') {
         // Use a network-first strategy.
@@ -73,11 +96,9 @@ self.addEventListener('fetch', (event) => {
       }
     }
 
-    shouldHandleFetch(event, config)
-      .then(onFetch(event, config))
-      .catch(err => {
-        log(err);        
-      });
+    if (shouldHandleFetch(event, config)) {
+      onFetch(event, config);
+    }
         
     /*
     // Let the browser do its default thing
