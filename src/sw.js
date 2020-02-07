@@ -31,13 +31,16 @@ self.addEventListener('activate', (event) => {
 });
 
 self.addEventListener('fetch', (event) => {
+  log("Fetch", event);
+
   var config = {
       staticCacheItems: [
         '/images/lyza.gif',
         '/css/styles.css',
         '/js/site.js',
         '/offline/',
-        '/'
+        '/',
+        '/prism-definitions.json'      
         ],
       cachePathPattern: /^\/(?:(20[0-9]{2}|about|blog|css|images|js)\/(.+)?)?$/
     };
@@ -46,10 +49,12 @@ self.addEventListener('fetch', (event) => {
       var request            = event.request;
       var url                = new URL(request.url);
       var criteria           = {
-        matchesPathPattern: !!(opts.cachePathPattern.exec(url.pathname)),
+        matchesPathPattern: !!(opts.cachePathPattern.exec(url.pathname)) || opts.staticCacheItems.includes(url.pathname),
         isGETRequest      : request.method === 'GET',
         isFromMyOrigin    : url.origin === self.location.origin
       };
+
+      log(`shouldHandleFetch() url.pathname=${url.pathname}`, criteria);
     
       // Create a new array with just the keys from criteria that have
       // failing (i.e. false) values.
@@ -62,6 +67,7 @@ self.addEventListener('fetch', (event) => {
   
 
     function onFetch (event, opts) {
+      log("onFetch", event, opts);
       var request      = event.request;
       var acceptHeader = request.headers.get('Accept');
       var resourceType = 'static';
@@ -75,6 +81,8 @@ self.addEventListener('fetch', (event) => {
     
       // {String} [static|image|content]
       cacheKey = resourceType;
+
+      log(`onFetch() resourceType=${resourceType}`);
 
       // 1. Determine what kind of asset this is… (above).
       if (resourceType === 'content') {
@@ -98,6 +106,8 @@ self.addEventListener('fetch', (event) => {
 
     if (shouldHandleFetch(event, config)) {
       onFetch(event, config);
+    } else {
+      log("load from network");
     }
         
     /*
