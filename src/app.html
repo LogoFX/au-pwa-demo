@@ -1,53 +1,50 @@
 <template>
-  <!-- <h1>${message}</h1>
-  <h2 if.bind="isOnline">Application is ONLINE!</h2>
-  <h2 if.bind="!isOnline">Application is OFFLINE!</h2> -->
+  <require from="./resources/css/custom.scss"></require>
+  
+  <!-- <require from="material-components-web/material-components-web.scss"></require> -->
+  
 
-  <header class="mdc-top-app-bar app-bar  mdc-elevation--z4" id="app-bar">
+<aside class="mdc-drawer mdc-drawer--dismissible mdc-drawer--open" style="position: fixed">
+  <div class="mdc-drawer__header">
+    <h3 class="mdc-drawer__title">Mail</h3>
+    <h6 class="mdc-drawer__subtitle">email@material.io</h6>
+    <!-- <span t="[html]friend">friend</span> -->
+  </div>
+  <div class="mdc-drawer__content">
+    <nav class="mdc-list">
+        <a repeat.for="nav of router.navigation" class="mdc-list-item ${nav.isActive ? 'mdc-list-item--activated' : ''}"  href.bind="nav.href" aria-current="page">
+          <i class="material-icons mdc-list-item__graphic" aria-hidden="true">${nav.settings.icon}</i>
+          <span class="mdc-list-item__text">${nav.title}</span>
+        </a>
+    </nav>
+  </div>
+</aside>
+
+<div class="mdc-drawer-app-content">
+  <header class="mdc-top-app-bar app-bar  mdc-elevation--z6" id="app-bar">
     <div class="mdc-top-app-bar__row">
-        <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
-          <!-- <button class="mdc-icon-button material-icons mdc-top-app-bar__navigation-icon mdc-ripple" data-mdc-ripple-is-unbounded="true">menu</button> -->
-          <div class="mdc-develop-toolbar__leading-icon">
-            <img src="../static/logo.png" width="164px">
-          </div>
-        </section>
-
-        <!-- <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end" role="toolbar">
-          <button class="material-icons mdc-top-app-bar__action-item mdc-icon-button mdc-ripple"
-                  data-mdc-ripple-is-unbounded="true" aria-label="Download"
-           click.delegate="logout()">power_settings_new</button>
-        </section> -->
-      </div>
+      <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
+        <button class="mdc-icon-button material-icons mdc-top-app-bar__navigation-icon mdc-ripple--unbounded mdc-ripple">menu</button>
+        <span class="mdc-top-app-bar__title">Dismissible Drawer</span>
+      </section>
+    </div>
+      <!-- <div role="progressbar" class="mdc-linear-progress mdc-linear-progress--indeterminate">
+        <div class="mdc-linear-progress__buffering-dots"></div>
+        <div class="mdc-linear-progress__buffer"></div>
+        <div class="mdc-linear-progress__bar mdc-linear-progress__primary-bar">
+          <span class="mdc-linear-progress__bar-inner"></span>
+        </div>
+        <div class="mdc-linear-progress__bar mdc-linear-progress__secondary-bar">
+          <span class="mdc-linear-progress__bar-inner"></span>
+        </div>
+      </div> -->
   </header>
 
-  <aside class="mdc-drawer mdc-drawer--dismissible mdc-drawer--open mdc-top-app-bar--fixed-adjust">
-    <div class="mdc-drawer__content">
-        <ul class="crypto-navigation__list">
-          <li repeat.for="nav of router.navigation" class="dropdown-list crypto-navigation__list-item ${nav.isActive ? 'crypto-navigation__list-item--active' : ''}">
-            <a href.bind="nav.href" dropdown-prop="title" class="mdc-ripple-surface ${nav.settings.subMenu ? 'list-item-open' : ''}">
-              <i class="material-icons crypto-navigation__list-item__icon" aria-hidden="true">${nav.settings.icon}</i>
-              <span class="crypto-navigation__list-item__label mdc-theme--on-surface mdc-typography--overline">
-                ${nav.title}
-              </span>
-              <i if.bind="nav.settings.subMenu" class="material-icons crypto-navigation__list-item__icon crypto-navigation__list-item__icon__arrow">expand_more</i>
-            </a>
-            <ul if.bind="nav.settings.subMenu" class="dropdown-list-items ${nav.settings.isOpen?'dropdown-list-open':''}">
-              <li repeat.for="prism of nav.settings.subMenu" style=" height: 30px;" class="crypto-navigation__list-item mdc-ripple-surface ${((prism.prismDefinition.id === selectedId) && nav.isActive) ? 'crypto-navigation__list-item--active' : ''}">
-                <a href="#/${prism.routeName}/${prism.prismDefinition.id}">
-                  <i class="material-icons crypto-navigation__list-item__icon" aria-hidden="true">show_chart</i>
-                  <span title="${prism.title}" class="crypto-navigation__list-item__label mdc-theme--on-surface mdc-typography--overline">${prism.shortName}</span>
-                </a>
-              </li>
-            </ul>
-          </li>
-        </ul>
-    </div>
-  </aside>
-
-  <div class="mdc-drawer-app-content mdc-top-app-bar--fixed-adjust">
-    <main class="main-content" id="main-content">
+  <main class="main-content" id="main-content" style="margin-left: 12px; margin-right: 12px">
+    <div class="mdc-top-app-bar--fixed-adjust">
       <router-view></router-view>
-    </main>
-  </div>
+    </div>
+  </main>
+</div>
 
 </template>

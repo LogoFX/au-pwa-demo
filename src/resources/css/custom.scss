@@ -1,0 +1,57 @@
+
+
+  // $mdc-theme-primary: #fcb8ab;
+  // $mdc-theme-secondary: #feeae6;
+  // $mdc-theme-on-primary: #442b2d;
+  // $mdc-theme-on-secondary: #442b2d;
+
+@import "../../../node_modules/material-design-icons/iconfont/material-icons.css";
+@import "../../../node_modules/roboto-npm-webfont/full/style.css";
+@import "../../../node_modules/@icon/material-icons/material-icons.css";
+@import "material-components-web/material-components-web.scss";
+
+body {
+  display: flex;
+  height: 100vh;
+}
+
+.mdc-drawer-app-content {
+  flex: auto;
+  overflow: auto;
+  position: relative;
+}
+
+.main-content {
+  overflow: auto;
+  height: 100%;
+}
+
+.app-bar {
+  position: absolute;
+}
+
+// only apply this style if below top app bar
+.mdc-top-app-bar {
+  z-index: 7;
+}
+
+.demo-width-class {
+  width: 400px;
+}
+
+.home {
+  display: flex; // Flexbox is used to easily arrange the persistent drawer and content side-by-side
+}
+
+.shrine-logo-drawer {
+  display: block;
+  width: 48px;
+  padding: 40px 0 0;
+  margin: 0 auto;
+  fill: currentColor;
+}
+
+.shrine-title {
+  text-align: center;
+  margin: 5px auto;
+}

@@ -8,6 +8,7 @@
   },
   "license": "MIT",
   "dependencies": {
+    "@icon/material-icons": "^2.2.0",
     "aurelia-animator-css": "^1.0.4",
     "aurelia-bootstrapper": "^2.3.3",
     "aurelia-dialog": "^2.0.0",
@@ -15,6 +16,9 @@
     "aurelia-store": "^1.5.0",
     "aurelia-validation": "^1.6.0",
     "idb": "^5.0.1",
+    "material-components-web": "^3.2.0",
+    "material-design-icons": "^3.0.1",
+    "roboto-npm-webfont": "^1.0.1",
     "serviceworker-webpack-plugin": "^1.0.1"
   },
   "devDependencies": {
