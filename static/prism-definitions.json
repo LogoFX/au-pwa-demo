@@ -1,7 +1,7 @@
 [
   {
     "heatmap": {
-      "data-source-uri": "/topics-matrix/all/{reservoir}/{measure}/{time-resolution}",
+      "data-source-uri": "/topics-matrix/all/data.json",
       "id": "Topics Heatmap",
       "name": "Topics Heatmap",
       "related-data": [
@@ -9,12 +9,12 @@
           "heatmap-slice": "topic",
           "items": [
             {
-              "indicator-value": "Intensity",
-              "title": "{Topic} Intensity"
+              "indicator-value": "Speed",
+              "title": "{Topic} Speed"
             },
             {
-              "indicator-value": "ExcessSentiment",
-              "title": "{Topic} Excess-Sentiment"
+              "indicator-value": "Velocity",
+              "title": "{Topic} Velocity"
             }
           ]
         },
@@ -26,12 +26,12 @@
           "heatmap-slice": "value",
           "items": [
             {
-              "indicator-value": "Intensity",
-              "title": "{Topic-Symbol} Intensity"
+              "indicator-value": "Speed",
+              "title": "{Topic-Symbol} Speed"
             },
             {
-              "indicator-value": "ExcessSentiment",
-              "title": "{Topic-Symbol} Excess-Sentiment"
+              "indicator-value": "Velocity",
+              "title": "{Topic-Symbol} Velocity"
             }
           ]
         }
@@ -42,20 +42,20 @@
   },
   {
     "heatmap": {
-      "data-source-uri": "/topics-matrix/fx/{reservoir}/{measure}/{time-resolution}",
-      "id": "FX Heatmap",
-      "name": "FX Heatmap",
+      "data-source-uri": "/topics-matrix/nx/data.json",
+      "id": "NF Heatmap",
+      "name": "NF Heatmap",
       "related-data": [
         {
           "heatmap-slice": "topic",
           "items": [
             {
-              "indicator-value": "Intensity",
-              "title": "{Topic} Intensity"
+              "indicator-value": "Speed",
+              "title": "{Topic} Speed"
             },
             {
-              "indicator-value": "ExcessSentiment",
-              "title": "{Topic} Excess-Sentiment"
+              "indicator-value": "Velocity",
+              "title": "{Topic} Velocity"
             }
           ]
         },
@@ -67,40 +67,40 @@
           "heatmap-slice": "value",
           "items": [
             {
-              "indicator-value": "Intensity",
-              "title": "{Topic-Symbol} Intensity"
+              "indicator-value": "Speed",
+              "title": "{Topic-Symbol} Speed"
             },
             {
-              "indicator-value": "ExcessSentiment",
-              "title": "{Topic-Symbol} Excess-Sentiment"
+              "indicator-value": "Velocity",
+              "title": "{Topic-Symbol} Velocity"
             }
           ]
         }
       ]
     },
-    "id": "FX",
-    "name": "FX"
+    "id": "NF",
+    "name": "NF"
   },
   {
     "heatmap": {
-      "data-source-uri": "/topics-matrix/banks/{reservoir}/{measure}/{time-resolution}",
-      "id": "Banks Heatmap",
-      "name": "Banks Heatmap",
+      "data-source-uri": "/topics-matrix/stores/data.json",
+      "id": "Stores Heatmap",
+      "name": "Stores Heatmap",
       "related-data": [
         {
           "heatmap-slice": "topic",
           "items": [
             {
-              "indicator-value": "HawkishDovish",
-              "title": "{Topic} Hawkish-Dovish"
+              "indicator-value": "Egle",
+              "title": "{Topic} Egle"
             },
             {
-              "indicator-value": "Intensity",
-              "title": "{Topic} Intensity"
+              "indicator-value": "Speed",
+              "title": "{Topic} Speed"
             },
             {
-              "indicator-value": "ExcessSentiment",
-              "title": "{Topic} Excess-Sentiment"
+              "indicator-value": "Velocity",
+              "title": "{Topic} Velocity"
             }
           ]
         },
@@ -108,7 +108,7 @@
           "heatmap-slice": "symbol",
           "items": [
             {
-              "indicator-value": "Intensity",
+              "indicator-value": "Speed",
               "title": "{Symbol}"
             }
           ]
@@ -117,32 +117,32 @@
           "heatmap-slice": "value",
           "items": [
             {
-              "indicator-value": "Intensity",
-              "title": "{Topic-Symbol} Intensity"
+              "indicator-value": "Speed",
+              "title": "{Topic-Symbol} Speed"
             }
           ]
         }
       ]
     },
-    "id": "Banks",
-    "name": "Banks"
+    "id": "Stores",
+    "name": "Stores"
   },
   {
     "heatmap": {
-      "data-source-uri": "/topics-matrix/candidates/{reservoir}/{measure}/{time-resolution}",
-      "id": "Candidates Heatmap",
-      "name": "Candidates Heatmap",
+      "data-source-uri": "/topics-matrix/gandicap/data.json",
+      "id": "Gandicap Heatmap",
+      "name": "Gandicap Heatmap",
       "related-data": [
         {
           "heatmap-slice": "topic",
           "items": [
             {
-              "indicator-value": "Intensity",
-              "title": "{Topic} Intensity"
+              "indicator-value": "Speed",
+              "title": "{Topic} Speed"
             },
             {
-              "indicator-value": "ExcessSentiment",
-              "title": "{Topic} Excess-Sentiment"
+              "indicator-value": "Velocity",
+              "title": "{Topic} Velocity"
             }
           ]
         },
@@ -150,7 +150,7 @@
           "heatmap-slice": "symbol",
           "items": [
             {
-              "indicator-value": "Intensity",
+              "indicator-value": "Speed",
               "title": "{Symbol}"
             }
           ]
@@ -159,19 +159,19 @@
           "heatmap-slice": "value",
           "items": [
             {
-              "indicator-value": "Intensity",
-              "title": "{Symbol} Intensity"
+              "indicator-value": "Speed",
+              "title": "{Symbol} Speed"
             }
           ]
         }
       ]
     },
-    "id": "Candidates",
-    "name": "Candidates"
+    "id": "Gandicap",
+    "name": "Gandicap"
   },
   {
     "heatmap": {
-      "data-source-uri": "/topics-matrix/fx/{reservoir}/{measure}/{time-resolution}",
+      "data-source-uri": "/topics-matrix/reservoirs/data.json",
       "id": "Reservoirs Heatmap",
       "name": "Reservoirs Heatmap",
       "related-data": [
@@ -179,12 +179,12 @@
           "heatmap-slice": "topic",
           "items": [
             {
-              "indicator-value": "Intensity",
-              "title": "{Topic} Intensity"
+              "indicator-value": "Speed",
+              "title": "{Topic} Speed"
             },
             {
-              "indicator-value": "ExcessSentiment",
-              "title": "{Topic} Excess-Sentiment"
+              "indicator-value": "Velocity",
+              "title": "{Topic} Velocity"
             }
           ]
         },
@@ -196,12 +196,12 @@
           "heatmap-slice": "value",
           "items": [
             {
-              "indicator-value": "Intensity",
-              "title": "{Topic-Symbol} Intensity"
+              "indicator-value": "Speed",
+              "title": "{Topic-Symbol} Speed"
             },
             {
-              "indicator-value": "ExcessSentiment",
-              "title": "{Topic-Symbol} Excess-Sentiment"
+              "indicator-value": "Velocity",
+              "title": "{Topic-Symbol} Velocity"
             }
           ]
         }
@@ -212,20 +212,20 @@
   },
   {
     "heatmap": {
-      "data-source-uri": "/topics-matrix/fx/{reservoir}/{measure}/{time-resolution}",
-      "id": "Factors Heatmap",
-      "name": "Factors Heatmap",
+      "data-source-uri": "/topics-matrix/fractals/data.json",
+      "id": "Fractals Heatmap",
+      "name": "Fractals Heatmap",
       "related-data": [
         {
           "heatmap-slice": "topic",
           "items": [
             {
-              "indicator-value": "Intensity",
-              "title": "{Topic} Intensity"
+              "indicator-value": "Speed",
+              "title": "{Topic} Speed"
             },
             {
-              "indicator-value": "ExcessSentiment",
-              "title": "{Topic} Excess-Sentiment"
+              "indicator-value": "Velocity",
+              "title": "{Topic} Velocity"
             }
           ]
         },
@@ -237,18 +237,18 @@
           "heatmap-slice": "value",
           "items": [
             {
-              "indicator-value": "Intensity",
-              "title": "{Topic-Symbol} Intensity"
+              "indicator-value": "Speed",
+              "title": "{Topic-Symbol} Speed"
             },
             {
-              "indicator-value": "ExcessSentiment",
-              "title": "{Topic-Symbol} Excess-Sentiment"
+              "indicator-value": "Velocity",
+              "title": "{Topic-Symbol} Velocity"
             }
           ]
         }
       ]
     },
-    "id": "Factors",
-    "name": "Factors"
+    "id": "Fractals",
+    "name": "Fractals"
   }
 ]
