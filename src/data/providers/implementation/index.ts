@@ -1,1 +1,1 @@
-export * from './explore-provider';
+export * from './local-db';

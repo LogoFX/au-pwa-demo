@@ -1,2 +1,3 @@
 export * from './data-service';
-export * from './heatmap';
+export * from './company';
+export * from './contact';

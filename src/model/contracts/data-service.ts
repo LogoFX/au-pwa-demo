@@ -1,9 +1,20 @@
-import { IPrismDefinition, IHeatmap } from "./heatmap";
+import { ICompany } from './company';
+import { IContact } from "./contact";
 
 export interface IDataService {
-  heatmapPrismList: IPrismDefinition[];
 
-  getHeatmapPrismList(): Promise<void>;
-  getHeatmap(prismId: string): Promise<IHeatmap>;
-  downloadHeatmap(prismId: string): Promise<string>;  
+  contacts: IContact[];
+  companies: ICompany[];
+
+  createContact(): Promise<IContact>;
+  getContact(id: string): Promise<IContact>;
+  getContacts(): Promise<IContact[]>;
+  updateContact(model: IContact): Promise<IContact>;
+  deleteContact(model: IContact): Promise<void>;
+
+  createCompany(): Promise<ICompany>;
+  getCompany(id: string): Promise<ICompany>;
+  getCompanies(): Promise<ICompany[]>;
+  updateCompany(model: ICompany): Promise<ICompany>;
+  deleteCompany(model: ICompany): Promise<void>;
 }

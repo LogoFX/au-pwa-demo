@@ -1,46 +1,187 @@
+import { ContactDto, ContactProvider, CompanyDto, CompanyProvider } from 'data';
+import { IDataService, ICompany, Company, IContact, Contact } from 'model';
+import { Guid } from 'logofx';
 import { autoinject } from 'aurelia-framework';
-import { IDataService, IPrismDefinition, IHeatmap } from 'model/contracts';
-import { HeatmapProvider, PrismDefinitionDto, RelatedDataDto, RelatedDataItemDto } from 'data';
-import { PrismDefinition, HeatmapDefinition, RelatedData, RelatedDataItem } from './heatmap';
 
 /**
  * DataService
  */
 @autoinject
 export class DataService implements IDataService {
-  
-  public heatmapPrismList: IPrismDefinition[];
 
-  // tslint:disable: no-parameter-properties
-  constructor(private heatmapProvider: HeatmapProvider) {
+  public companies: ICompany[] = [];
+  public contacts: IContact[] = [];
+
+  // tslint:disable-next-line: no-parameter-properties
+  constructor(private companyProvider: CompanyProvider, private contactProvider: ContactProvider) {
   }
 
-  public async getHeatmapPrismList(): Promise<void> {
-    const prismList = await this.heatmapProvider.getPrismDefinitionList();
-    this.heatmapPrismList = prismList.map(x => this.mapPrismDefinition(x));
+  public async createCompany(): Promise<ICompany> {
+    // tslint:disable-next-line: completed-docs
+    class NewCompany extends Company {
+      constructor (id: string) {
+        super();
+
+        this.id = id;
+        this.makeNew();
+      }
+    }
+
+    return new Promise<ICompany>(resolve => {
+      const company = new NewCompany(Guid.create().toString());
+      resolve(company);
+    });
   }
 
-  public async getHeatmap(prismId: string): Promise<IHeatmap> {
-    throw new Error("Method not implemented.");
+  public async getCompany(id: string): Promise<ICompany> {
+    return new Promise<ICompany>(async resolve => {
+      const companyDtos: ContactDto[] = await this.contactProvider.getAsync(id);
+      const company: ICompany = new Company();
+      company.id = companyDtos[0].id;
+      company.name = companyDtos[0].name;
+      company._rev = companyDtos[0]._rev;
+      resolve(company);
+    });
   }
 
-  public async downloadHeatmap(prismId: string): Promise<string> {
-    throw new Error("Method not implemented.");
+  public async getCompanies(): Promise<ICompany[]> {
+    await this.updateLocalCompanies();
+    return new Promise(resolve => {
+      resolve(this.companies);
+    });
   }
 
-  private mapPrismDefinition(prismDto: PrismDefinitionDto): PrismDefinition {
-    const prism = new PrismDefinition(prismDto.id, prismDto.name);
-    prism.heatmap = new HeatmapDefinition();
-    prism.heatmap.dataSourceUri = prismDto.heatmap.dataSourceUri;
-    prism.heatmap.relatedData = prismDto.heatmap.relatedData.map(x => this.mapRelatedData(x));
-    return prism;
+  public async updateCompany(model: ICompany): Promise<ICompany> {
+    const dto: CompanyDto = new CompanyDto();
+    dto.id = model.id;
+    dto.name = model.name;
+    if (!model.isNew) {
+      dto._rev = model._rev;
+      await this.companyProvider.putAsync(dto)
+              .then(() => this.updateLocalCompanies())
+              .catch(error => {
+                throw error;
+              });
+    } else {
+      await this.companyProvider.postAsync(dto)
+              .then(() => this.updateLocalCompanies())
+              .catch(error => {
+                throw error;
+              });
+    }
+
+    return this.companies.find(c => c.id === model.id);
   }
 
-  private mapRelatedData(dto: RelatedDataDto): RelatedData {
-    return { slice: dto.slice, items: dto.items.map(x => this.mapRelatedDataItem(x)) };
+  public async deleteCompany(model: ICompany): Promise<void> {
+      await this.companyProvider
+        .deleteAsync(model.id)
+        .then(async () => {
+          await this.updateLocalCompanies();
+        })
+        .catch(err => {
+            throw err;
+        });
   }
 
-  private mapRelatedDataItem(dto: RelatedDataItemDto): RelatedDataItem {
-    return { title: dto.title, indicatorValue: dto.indicatorValue };
+  public async createContact(): Promise<IContact> {
+    // tslint:disable-next-line: completed-docs
+    class NewContact extends Contact {
+      constructor (id: string) {
+        super();
+
+        this.id = id;
+        this.makeNew();
+      }
+    }
+
+    return new Promise<IContact>(resolve => {
+      const contact = new NewContact(Guid.create().toString());
+      resolve(contact);
+    });
   }
+
+  public async getContact(id: string): Promise<IContact> {
+    return new Promise<IContact>(async resolve => {
+      const contactDtos: ContactDto[] = await this.contactProvider.getAsync(id);
+      const contact: IContact = new Contact();
+      contact.id = contactDtos[0].id;
+      contact.firstName = contactDtos[0].firstName;
+      contact.lastName = contactDtos[0].lastName;
+      contact.email = contactDtos[0].email;
+      contact._rev = contactDtos[0]._rev;
+      resolve(contact);
+    });
+  }
+
+  public async getContacts(): Promise<IContact[]> {
+    await this.updateLocalContacts();
+    return new Promise(resolve => {
+      resolve(this.contacts);
+    });
+  }
+
+  public async updateContact(model: IContact): Promise<IContact> {
+    const dto: ContactDto = new ContactDto();
+    dto.id = model.id;
+    dto.firstName = model.firstName;
+    dto.lastName = model.lastName;
+    dto.email = model.email;
+    if (!model.isNew) {
+      dto._rev = model._rev;
+      await this.contactProvider.putAsync(dto)
+              .then(() => this.updateLocalContacts())
+              .catch(error => {
+                throw error;
+              });
+    } else {
+      await this.contactProvider.postAsync(dto)
+              .then(() => this.updateLocalContacts())
+              .catch(error => {
+                throw error;
+              });
+    }
+
+    return this.contacts.find(c => c.id === model.id);
+  }
+
+  public async deleteContact(model: IContact): Promise<void> {
+      await this.contactProvider
+        .deleteAsync(model.id)
+        .then(async () => {
+          await this.updateLocalContacts();
+        })
+        .catch(err => {
+            throw err;
+        });
+  }
+
+  private async updateLocalContacts(): Promise<void> {
+    this.contacts.splice(0, this.contacts.length);
+
+    (await this.contactProvider.getAsync()).forEach(dto => {
+      const model: IContact = new Contact();
+      model.id = dto.id;
+      model.firstName = dto.firstName;
+      model.lastName = dto.lastName;
+      model.email = dto.email;
+      model._rev = dto._rev;
+      this.contacts.push(model);
+    });
+
+  }
+
+  private async updateLocalCompanies(): Promise<void> {
+    this.companies.splice(0, this.companies.length);
+
+    (await this.contactProvider.getAsync()).forEach(dto => {
+      const model: ICompany = new Company();
+      model.id = dto.id;
+      model.name = dto.name;
+      model._rev = dto._rev;
+      this.companies.push(model);
+    });
+
+  }
+
 }

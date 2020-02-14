@@ -1,114 +1,44 @@
-import { PLATFORM } from 'aurelia-pal';
-import { autoinject } from 'aurelia-framework';
-import runtime from 'serviceworker-webpack-plugin/lib/runtime';
-import * as LogManager from 'aurelia-logging';
-import {Router, RouterConfiguration} from 'aurelia-router';
-import { HttpResponseMessage } from "aurelia-http-client";
+import { MDCTopAppBar } from '@material/top-app-bar';
+import { RouterConfiguration, Router } from 'aurelia-router';
+import { PLATFORM, autoinject } from 'aurelia-framework';
+import { MDCDrawer } from '@material/drawer';
+import { I18N } from 'aurelia-i18n';
 
-@autoinject()
+// tslint:disable-next-line: completed-docs
+@autoinject
 export class App {
- 
-  private logger = LogManager.getLogger('au-pwa-demo:app');
-  private readonly onOffline: () => void;
-  private readonly onOnline: () => void;
+  public message: string = 'Hello Fucking World!';
 
   public router: Router;
 
-  public message: string = 'Hello World!';
+  // tslint:disable-next-line: no-parameter-properties
+  constructor(private i18n: I18N) {  }
 
-  public isOnline: boolean;
+  public configureRouter(config: RouterConfiguration, router: Router): void {
 
-  constructor () {
-
-    this.onOffline = () => {
-      this.isOnline = false;
-    };
-
-    this.onOnline = () => {
-      this.isOnline = true;
-    }
-  }
-
-  public async configureRouter(config: RouterConfiguration, router: Router): Promise<void> {
     this.router = router;
-    //config.title = "MKT Media Stats - Dashboard";
-
-    //this.showSpiner = true;
-
-    try {
-      //await this.dataService.getHeatmapPrismList();
-      //await this.dataService.getRiskPrismList();
-    } catch (error) {
-      if (error instanceof HttpResponseMessage) {
-        alert(error.content);
-      }
-      //this.snackbarService.show(error);
-    } finally {
-      //this.showSpiner = false;
-    }
-
-    //this._prismSettings = { icon: "find_replace", subMenu:  this.prisms, isOpen: false };
-    //this._riskPrismSettings = { icon: "find_replace", subMenu:  this.riskPrisms, isOpen: false };
+    config.title = 'Aurelia MDC Demo';
 
     config.map([
-      {
-        route: "explore/:id?",
-        name: "explore",
-        moduleId: PLATFORM.moduleName("explore"),
-        settings: { icon: "bubble_chart" }
-      },
-      {
-        route: ["explore/0", "explore/:id?", ""],
-        moduleId: PLATFORM.moduleName("explore"),
-        nav: true,
-        title: "Explore",
-        //settings: this._prismSettings
-      },
-      {
-        route: "build",
-        name: "Build",
-        moduleId: PLATFORM.moduleName("build"),
-        nav: true,
-        title: "Build",
-        settings: { icon: "call_merge" }
-      },
-      {
-        route: "invest",
-        name: "Invest",
-        moduleId: PLATFORM.moduleName("invest"),
-        nav: true,
-        title: "invest",
-        settings: { icon: "input" }
-      },
+      { route: ['', 'contacts'], name: 'contacts', moduleId: PLATFORM.moduleName('contacts'), nav: true, title: 'The Contacts', settings: { icon: 'people' } },
+      { route: 'login', name: 'login', moduleId: PLATFORM.moduleName('login'), nav: true, title: 'Login', settings: { icon: 'lock' } }
     ]);
-  }  
- 
-  public attached() {
-    this.setUpOfflineNotification();
-    this.setUpServiceWorker();
   }
 
-  public detached() {
-    window.removeEventListener('offline', this.onOffline);
-    window.removeEventListener('online', this.onOnline);
-  }  
+  public attached(): void {
+    console.log('App - attached');
 
-  private setUpOfflineNotification() {
-    this.isOnline = navigator.onLine;
+    this.initMDC();
 
-    window.addEventListener('offline', this.onOffline);
-    window.addEventListener('online', this.onOnline);
   }
 
-  private setUpServiceWorker() {
-    if ('serviceWorker' in navigator) {
-        runtime.register()
-            .then((registration) => this.logger.info('Service worker is registered', registration))
-            .catch((registrationError) => this.logger.error(
-                'Service worker failed to register', registrationError,
-            ));
-    } else {
-        this.logger.info('Service worker is not available in this browser.');
-    }
-  }  
+  private initMDC(): void {
+    const drawer = MDCDrawer.attachTo(document.querySelector('.mdc-drawer'));
+
+    const topAppBar = MDCTopAppBar.attachTo(document.getElementById('app-bar'));
+    topAppBar.setScrollTarget(document.getElementById('main-content'));
+    topAppBar.listen('MDCTopAppBar:nav', () => {
+      drawer.open = !drawer.open;
+    });
+  }
 }

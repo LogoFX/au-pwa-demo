@@ -1,0 +1,134 @@
+<template>
+    <style>
+            
+        .header {
+          text-align: center;
+        }
+    
+        .field {
+          display: flex;          
+          margin: 20px auto;
+        }
+    
+        .button-container {
+          display: flex;
+          justify-content: flex-end;
+          margin: auto;
+        }
+    
+        .button-container button {
+          margin: 3px;
+        }
+    
+        .main {
+          display: flex;
+          flex-direction: row;
+          justify-content: center;
+        }
+
+        .form-label-wrapper {
+          display: block;
+          padding: 50px 0px 0px;          
+        }
+    
+      </style>
+   <main id="main" class="view-layout__content">
+    <h1 class="mdc-typography--headline2">Companies</h1>
+    <div>
+      <button class="mdc-fab" aria-label="Add" click.delegate="createNewCompany()">
+        <span class="mdc-fab__icon material-icons">add</span>
+      </button>
+    </div>
+    <div>
+      <div class="mdc-layout-grid mdc-elevation--z6">
+        <div class="mdc-layout-grid__inner">
+          <div class="mdc-layout-grid__cell">
+            <div>
+              <div class="mdc-text-field">
+                <input id="company-name" validation-errors.bind="companyNameErrors" value.bind="model.name & validate:model.rules" type="text"
+                  class="mdc-text-field__input" aria-controls="company-name-helper-text"
+                  aria-describedby="company-name-helper-text" attach-focus />
+                <label class="mdc-floating-label" for="company-name">Company Name:</label>
+                <div class="mdc-line-ripple"></div>
+              </div>
+              <div class="mdc-text-field-helper-line">
+                <div id="company-name-helper-text"
+                  class="mdc-text-field-helper-text mdc-text-field-helper-text--validation-msg" aria-hidden="true">
+                  <span repeat.for="errorInfo of companyNameErrors">${errorInfo.error.message}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="mdc-layout-grid__cell">
+            <div>
+
+            </div>
+          </div>
+        </div>
+        
+        
+        
+
+        <div class="button-container">
+          <button type="button" class="mdc-button cancel">
+            Cancel
+          </button>
+          <button class="mdc-button mdc-button--raised next">
+            OK
+          </button>
+        </div>
+
+      </div>
+
+    </div>
+    <div class="mdc-data-table" style="width: 100%">
+      <table class="mdc-data-table__table" aria-label="Comapnies">
+        <thead>
+          <tr class="mdc-data-table__header-row">
+            <th class="mdc-data-table__header-cell mdc-data-table__header-cell--checkbox" role="columnheader"
+              scope="col">
+              <div id="selectionStateCheckbox"
+                class="mdc-checkbox mdc-checkbox--selected mdc-data-table__header-row-checkbox">
+                <input checked.bind="selectionState" type="checkbox" class="mdc-checkbox__native-control"
+                  aria-label="Toggle all rows" />
+                <div class="mdc-checkbox__background">
+                  <svg class="mdc-checkbox__checkmark" viewbox="0 0 24 24">
+                    <path class="mdc-checkbox__checkmark-path" fill="none" d="M1.73,12.91 8.1,19.28 22.79,4.59" />
+                  </svg>
+                  <div class="mdc-checkbox__mixedmark"></div>
+                </div>
+              </div>
+            </th>
+            <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Company Name</th>            
+            <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody class="mdc-data-table__content">
+          <tr repeat.for='contact of contacts'
+            class="mdc-data-table__row ${ contact.isSelected ? 'mdc-data-table__row--selected' : '' }"
+            data-row-id="${contact.model.id}">
+            <td class="mdc-data-table__cell mdc-data-table__cell--checkbox">
+              <div class="mdc-checkbox mdc-data-table__row-checkbox">
+                <input type="checkbox" checked.two-way="contact.isSelected" class="mdc-checkbox__native-control"
+                  aria-labelledby="r0" />
+                <div class="mdc-checkbox__background">
+                  <svg class="mdc-checkbox__checkmark" viewbox="0 0 24 24">
+                    <path class="mdc-checkbox__checkmark-path" fill="none" d="M1.73,12.91 8.1,19.28 22.79,4.59" />
+                  </svg>
+                  <div class="mdc-checkbox__mixedmark"></div>
+                </div>
+              </div>
+            </td>
+            <td id="td-company-name--${contact.model.id}" class="mdc-data-table__cell">${contact.model.firstName}</td>
+            <td id="td-actions--${contact.model.id}" class="mdc-data-table__cell">
+              <button click.delegate="$parent.editContact(contact.model.id)" class="mdc-icon-button material-icons" data-mdc-auto-init="MDCButton">edit</button>
+              <button click.delegate="$parent.deleteContact(contact.model.id)" class="mdc-icon-button material-icons" data-mdc-auto-init="MDCButton">delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
+
+
+</template>

@@ -1,50 +1,51 @@
 <template>
-  <require from="./resources/css/custom.scss"></require>
-  
-  <!-- <require from="material-components-web/material-components-web.scss"></require> -->
-  
+    <require from="./resources/css/custom.scss"></require>
+    
+    <!-- <require from="material-components-web/material-components-web.scss"></require> -->
+    
 
-<aside class="mdc-drawer mdc-drawer--dismissible mdc-drawer--open" style="position: fixed">
-  <div class="mdc-drawer__header">
-    <h3 class="mdc-drawer__title">Mail</h3>
-    <h6 class="mdc-drawer__subtitle">email@material.io</h6>
-    <!-- <span t="[html]friend">friend</span> -->
-  </div>
-  <div class="mdc-drawer__content">
-    <nav class="mdc-list">
-        <a repeat.for="nav of router.navigation" class="mdc-list-item ${nav.isActive ? 'mdc-list-item--activated' : ''}"  href.bind="nav.href" aria-current="page">
-          <i class="material-icons mdc-list-item__graphic" aria-hidden="true">${nav.settings.icon}</i>
-          <span class="mdc-list-item__text">${nav.title}</span>
-        </a>
-    </nav>
-  </div>
-</aside>
-
-<div class="mdc-drawer-app-content">
-  <header class="mdc-top-app-bar app-bar  mdc-elevation--z6" id="app-bar">
-    <div class="mdc-top-app-bar__row">
-      <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
-        <button class="mdc-icon-button material-icons mdc-top-app-bar__navigation-icon mdc-ripple--unbounded mdc-ripple">menu</button>
-        <span class="mdc-top-app-bar__title">Dismissible Drawer</span>
-      </section>
+  <aside class="mdc-drawer mdc-drawer--dismissible mdc-drawer--open" style="position: fixed">
+    <div class="mdc-drawer__header">
+      <h3 class="mdc-drawer__title">Mail</h3>
+      <h6 class="mdc-drawer__subtitle">email@material.io</h6>
+      <!-- <span t="[html]friend">friend</span> -->
     </div>
-      <!-- <div role="progressbar" class="mdc-linear-progress mdc-linear-progress--indeterminate">
-        <div class="mdc-linear-progress__buffering-dots"></div>
-        <div class="mdc-linear-progress__buffer"></div>
-        <div class="mdc-linear-progress__bar mdc-linear-progress__primary-bar">
-          <span class="mdc-linear-progress__bar-inner"></span>
-        </div>
-        <div class="mdc-linear-progress__bar mdc-linear-progress__secondary-bar">
-          <span class="mdc-linear-progress__bar-inner"></span>
-        </div>
-      </div> -->
-  </header>
-
-  <main class="main-content" id="main-content" style="margin-left: 12px; margin-right: 12px">
-    <div class="mdc-top-app-bar--fixed-adjust">
-      <router-view></router-view>
+    <div class="mdc-drawer__content">
+      <nav class="mdc-list">
+          <a repeat.for="nav of router.navigation" class="mdc-list-item ${nav.isActive ? 'mdc-list-item--activated' : ''}"  href.bind="nav.href" aria-current="page">
+            <i class="material-icons mdc-list-item__graphic" aria-hidden="true">${nav.settings.icon}</i>
+            <span class="mdc-list-item__text">${nav.title}</span>
+          </a>
+      </nav>
     </div>
-  </main>
-</div>
+  </aside>
+
+  <div class="mdc-drawer-app-content">
+    <header class="mdc-top-app-bar app-bar  mdc-elevation--z6" id="app-bar">
+      <div class="mdc-top-app-bar__row">
+        <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
+          <button class="mdc-icon-button material-icons mdc-top-app-bar__navigation-icon mdc-ripple--unbounded mdc-ripple">menu</button>
+          <span class="mdc-top-app-bar__title">Dismissible Drawer</span>
+        </section>
+      </div>
+        <!-- <div role="progressbar" class="mdc-linear-progress mdc-linear-progress--indeterminate">
+          <div class="mdc-linear-progress__buffering-dots"></div>
+          <div class="mdc-linear-progress__buffer"></div>
+          <div class="mdc-linear-progress__bar mdc-linear-progress__primary-bar">
+            <span class="mdc-linear-progress__bar-inner"></span>
+          </div>
+          <div class="mdc-linear-progress__bar mdc-linear-progress__secondary-bar">
+            <span class="mdc-linear-progress__bar-inner"></span>
+          </div>
+        </div> -->
+    </header>
+
+    <main class="main-content" id="main-content" style="margin-left: 12px; margin-right: 12px">
+      <div class="mdc-top-app-bar--fixed-adjust">
+
+        <router-view></router-view>
+      </div>
+    </main>
+  </div>
 
 </template>

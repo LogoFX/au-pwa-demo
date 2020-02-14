@@ -8,6 +8,12 @@ export * from './view-model';
 export * from './logging';
 export * from './ui-services';
 
+export function configure(config: FrameworkConfiguration): void {
+  //config.globalResources(['./model', './Core', './view-model']);
+  // config.feature(PLATFORM.moduleName('model/index'));
+  // config.feature(PLATFORM.moduleName('view-model/index'));
+}
+
 /**
  * Checks if the given argument is undefined.
  *

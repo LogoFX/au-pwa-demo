@@ -1,0 +1,67 @@
+<template>
+  <div id="my-dialog" class="mdc-dialog mdc-dialog--open" role="alertdialog" aria-modal="true" aria-hidden="true"
+    aria-labelledby="my-dialog-title" aria-describedby="my-dialog-content">
+    <div class="mdc-dialog__container">
+      <div class="mdc-dialog__surface">
+        <!-- Title cannot contain leading whitespace due to mdc-typography-baseline-top() -->
+        <h2 class="mdc-dialog__title mdc-typography--headline4" id="my-dialog-title">${title}</h2>
+        <div class="mdc-dialog__content" id="my-dialog-content">
+          <div class="mdc-layout-grid">
+            <div class="mdc-layout-grid__inner">
+              <div class="mdc-layout-grid__cell">
+                <div>
+                  <div class="mdc-text-field">
+                    <input id="firstName" validation-errors.bind="firstNameErrors" value.bind="model.firstName & validate:model.rules" type="text"
+                      class="mdc-text-field__input" aria-controls="firstName-helper-text"
+                      aria-describedby="firstName-helper-text" attach-focus />
+                    <label class="mdc-floating-label" for="firstName">First Name*</label>
+                    <div class="mdc-line-ripple"></div>
+                  </div>
+                  <div class="mdc-text-field-helper-line">
+                    <div id="firstName-helper-text"
+                      class="mdc-text-field-helper-text mdc-text-field-helper-text--validation-msg" aria-hidden="true">
+                      <span repeat.for="errorInfo of firstNameErrors">${errorInfo.error.message}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="mdc-layout-grid__cell">                
+                    <div>
+                      <div class="mdc-text-field">
+                        <input id="lastName" validation-errors.bind="lastNameErrors" value.two-way="model.lastName & validate:model.rules" type="text"
+                          class="mdc-text-field__input" aria-controls="lastName-helper-text"
+                          aria-describedby="lastName-helper-text" />
+                        <label class="mdc-floating-label" for="lastName">Last Name*</label>
+                        <div class="mdc-line-ripple"></div>
+                      </div>
+                      <div class="mdc-text-field-helper-line">
+                        <div id="lastName-helper-text"
+                          class="mdc-text-field-helper-text mdc-text-field-helper-text--validation-msg"
+                          aria-hidden="true">
+                          <span repeat.for="errorInfo of lastNameErrors">${errorInfo.error.message}</span>
+                        </div>
+                      </div>
+                </div>
+              </div>
+            </div>
+            <div class="mdc-layout-grid__inner">
+            </div>
+          </div>
+        </div>
+
+        <footer class="mdc-dialog__actions">
+          <button type="button" class="mdc-button mdc-dialog__button" click.delegate="cancel()"
+            data-mdc-dialog-action="close">
+            <span class="mdc-button__label">Cancel</span>
+          </button>
+          <button type="button" class="mdc-button mdc-dialog__button" disabled.bind="!canExecuteOk"
+            click.delegate="ok()" data-mdc-dialog-action="accept">
+            <span class="mdc-button__label">OK</span>
+          </button>
+        </footer>
+      </div>
+    </div>
+    <div class="mdc-dialog__scrim"></div>
+  </div>
+
+</template>

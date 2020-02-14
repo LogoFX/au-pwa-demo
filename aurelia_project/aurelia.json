@@ -1,5 +1,5 @@
 {
-  "name": "au-pwa-demo",
+  "name": "au-mdc-demo",
   "type": "project:application",
   "paths": {
     "root": "src",
@@ -24,7 +24,6 @@
     "hmr": false,
     "open": false,
     "port": 8080,
-    "host": "localhost",
     "output": "dist"
   },
   "packageManager": "npm"

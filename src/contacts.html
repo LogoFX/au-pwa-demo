@@ -1,0 +1,103 @@
+<template>
+  <style>
+    .view-layout {
+      display: flex;
+      flex: 1;
+      flex-direction: row;
+      width: 100%;
+      height: 100vh;
+    }
+
+    .view-layout__content {
+      flex: 1;
+    }
+
+    .view-layout__drawer--align-end.mdc-list-item.mdc-list-item__graphic {
+        margin-right: 0;
+        margin-left: 0;
+      
+    }
+
+  </style>
+  
+  <div class="view-layout">    
+    <main id="main" class="view-layout__content">
+      <h1 class="mdc-typography--headline2">Contacts</h1>
+      <div>
+        <button class="mdc-fab" aria-label="Favorite" click.delegate="createNewContact()">
+          <span class="mdc-fab__icon material-icons">add</span>
+        </button>
+      </div>
+      <div class="mdc-data-table" style="width: 100%">
+        <table class="mdc-data-table__table" aria-label="Dessert calories">
+          <thead>
+            <tr class="mdc-data-table__header-row">
+              <th class="mdc-data-table__header-cell mdc-data-table__header-cell--checkbox" role="columnheader"
+                scope="col">
+                <div id="selectionStateCheckbox"
+                  class="mdc-checkbox mdc-checkbox--selected mdc-data-table__header-row-checkbox">
+                  <input checked.bind="selectionState" type="checkbox" class="mdc-checkbox__native-control"
+                    aria-label="Toggle all rows" />
+                  <div class="mdc-checkbox__background">
+                    <svg class="mdc-checkbox__checkmark" viewbox="0 0 24 24">
+                      <path class="mdc-checkbox__checkmark-path" fill="none" d="M1.73,12.91 8.1,19.28 22.79,4.59" />
+                    </svg>
+                    <div class="mdc-checkbox__mixedmark"></div>
+                  </div>
+                </div>
+              </th>
+              <th class="mdc-data-table__header-cell" role="columnheader" scope="col">First Name</th>
+              <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Last Name</th>
+              <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Email</th>
+              <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Actions</th>
+            </tr>
+          </thead>
+          <tbody class="mdc-data-table__content">
+            <tr repeat.for='contact of contacts'
+              class="mdc-data-table__row ${ contact.isSelected ? 'mdc-data-table__row--selected' : '' }"
+              data-row-id="${contact.model.id}">
+              <td class="mdc-data-table__cell mdc-data-table__cell--checkbox">
+                <div class="mdc-checkbox mdc-data-table__row-checkbox">
+                  <input type="checkbox" checked.two-way="contact.isSelected" class="mdc-checkbox__native-control"
+                    aria-labelledby="r0" />
+                  <div class="mdc-checkbox__background">
+                    <svg class="mdc-checkbox__checkmark" viewbox="0 0 24 24">
+                      <path class="mdc-checkbox__checkmark-path" fill="none" d="M1.73,12.91 8.1,19.28 22.79,4.59" />
+                    </svg>
+                    <div class="mdc-checkbox__mixedmark"></div>
+                  </div>
+                </div>
+              </td>
+              <td id="td-first-name--${contact.model.id}" class="mdc-data-table__cell">${contact.model.firstName}</td>
+              <td id="td-last-name--${contact.model.id}" class="mdc-data-table__cell">${contact.model.lastName}</td>
+              <td id="td-email--${contact.model.id}" class="mdc-data-table__cell">${contact.model.email}</td>
+              <td id="td-email--${contact.model.id}" class="mdc-data-table__cell">
+                <button click.delegate="$parent.openRightSideDrawer(contact.model.id)" class="mdc-icon-button material-icons" data-mdc-auto-init="MDCButton">visibility</button>
+                <button click.delegate="$parent.editContact(contact.model.id)" class="mdc-icon-button material-icons" data-mdc-auto-init="MDCButton">edit</button>
+                <button click.delegate="$parent.deleteContact(contact.model.id)" class="mdc-icon-button material-icons" data-mdc-auto-init="MDCButton">delete</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </main>
+
+    <!-- Right drawer -->
+    <aside id="right-drawer"
+      class="view-layout__drawer view-layout__drawer--align-end mdc-drawer mdc-drawer--modal mdc-typography"
+      dir="rtl">
+      <nav class="mdc-drawer__drawer" dir="ltr">
+        <header class="mdc-drawer__header">
+          <div class="mdc-drawer__header-content" style="margin-top: 10px;">
+            Header here
+            <button class="mdc-icon-button material-icons" data-mdc-auto-init="MDCB01utton">close</button>
+          </div>
+        </header>
+        <nav id="icon-with-text-demo" class="mdc-drawer__content">
+          <compose view-model.bind="site" view="./contact-preview.html"></compose>
+        </nav>
+      </nav> 
+    </aside>
+    <div class="mdc-drawer-scrim"></div>
+  </div>
+</template>

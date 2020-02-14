@@ -1,11 +1,10 @@
 {
+  "types": [ "node" ],
+  "typeRoots": [ "../node_modules/@types" ],
   "compileOnSave": false,
   "compilerOptions": {
     "module": "esnext",
     "skipLibCheck": true,
-    "typeRoots": [
-      "./node_modules/@types"
-    ],
     "removeComments": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
@@ -17,17 +16,13 @@
     ],
     "moduleResolution": "node",
     "baseUrl": "src",
-    "resolveJsonModule": true,
     "allowJs": true,
-    "esModuleInterop": true
+    "allowSyntheticDefaultImports": true
   },
   "include": [
     "./src/**/*.ts",
     "./test/**/*.ts",
     "./types/**/*.d.ts"
-  ],
-  "exclude": [
-    "./test/e2e/**/*.ts"
   ],
   "atom": {
     "rewriteTsconfig": false

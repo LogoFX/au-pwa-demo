@@ -1,1 +1,2 @@
-export * from './heatmap';
+export * from './company-dto';
+export * from './contact-dto';

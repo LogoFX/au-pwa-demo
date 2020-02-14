@@ -1,0 +1,8 @@
+{
+  "score": "Счет: {{score}}",
+  "lives": "{{count}} жизнь осталась",
+  "lives_plural": "{{count}} жизней осталось",
+  "friend": "Друг",
+  "friend_male": "Друг",
+  "friend_female": "Подруга"
+}

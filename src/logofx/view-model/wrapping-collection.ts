@@ -1,5 +1,5 @@
 import { transient, View } from "aurelia-framework";
-import { IModel, IEditableModel } from 'logofx/model';
+import { IModel, IEditableModel } from '../model';
 import { IObjectViewModel } from 'logofx';
 import * as Core from 'logofx/core';
 

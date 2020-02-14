@@ -1,1 +1,2 @@
-export * from './explore-provider';
+export * from './contact-provider';
+export * from './company-provider';
