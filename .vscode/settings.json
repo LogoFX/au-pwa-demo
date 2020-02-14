@@ -2,7 +2,6 @@
   "typescript.tsdk": "node_modules/typescript/lib",
   "html.suggest.angular1": false,
   "html.suggest.ionic": false,
-  "workbench.colorCustomizations": {},
   "files.exclude": {
     "**/.chrome": true,
     "**/node_modules": true,

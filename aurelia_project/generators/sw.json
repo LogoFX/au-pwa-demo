@@ -1,0 +1,4 @@
+{
+  "name": "sw",
+  "description": "Creates a sw.js file and places it in the project root folder (usually named as '/src')."
+}
