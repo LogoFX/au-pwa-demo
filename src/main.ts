@@ -9,7 +9,7 @@ const hook: MDCHook = new MDCHook();
 
 // tslint:disable: no-invalid-this
 Controller.prototype.attached = function(): void {
-      console.log('before attached');
+      //console.log('before attached');
       if (this.isAttached) {
         return;
       }
@@ -24,7 +24,7 @@ Controller.prototype.attached = function(): void {
         this.view.attached();
         hook.beforeBind(this.view);
       }
-      console.log('after attached');
+      //console.log('after attached');
     };
     // tslint:enable: no-invalid-this
 

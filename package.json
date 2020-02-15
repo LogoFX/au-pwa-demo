@@ -11,6 +11,7 @@
   "license": "MIT",
   "dependencies": {
     "@icon/material-icons": "^2.2.0",
+    "@types/serviceworker-webpack-plugin": "^1.0.0",
     "aurelia-animator-css": "^1.0.4",
     "aurelia-binding": "^2.5.2",
     "aurelia-bootstrapper": "^2.3.3",
@@ -24,10 +25,12 @@
     "i18next": "^19.0.2",
     "i18next-resource-store-loader": "^0.1.2",
     "i18next-xhr-backend": "^3.2.2",
+    "idb": "^5.0.1",
     "material-components-web": "^3.2.0",
     "material-design-icons": "^3.0.1",
     "pouchdb-browser": "^7.1.1",
-    "roboto-npm-webfont": "^1.0.1"
+    "roboto-npm-webfont": "^1.0.1",
+    "serviceworker-webpack-plugin": "^1.0.1"
   },
   "devDependencies": {
     "@types/lodash": "^4.14.149",
