@@ -1,178 +1,99 @@
-/* eslint-global-variables serviceWorkerOption */
-
-const staticCachePrefix = 'static';
-const staticCacheName = `${staticCachePrefix}-${VERSION}`;
-
-function log(message, ...args) {
-    console.log('[SW] ' + message, ...args);
-}
+// Caches
+var CURRENT_CACHES = {
+  font: 'font-cache-v1',
+  css:'css-cache-v1',
+  js:'js-cache-v1',
+  site: 'site-cache-v1',
+  image: 'image-cache-v1'
+};
 
 self.addEventListener('install', (event) => {
-    log('Installing SW version:', VERSION);
-    event.waitUntil(
-        caches.open(staticCacheName)
-            .then(cache => {
-                log('Caching app shell');
-                cache.addAll(serviceWorkerOption.assets);  // This comes from serviceworker-webpack-plugin.
-            }),
-    );
+  self.skipWaiting();
+  console.log('Service Worker has been installed');
 });
 
 self.addEventListener('activate', (event) => {
-    log('Cleaning old cache shell');
-    event.waitUntil(
-        caches.keys()
-            .then((keylist) => Promise.all(
-                keylist
-                    .filter((key) => key !== staticCacheName && key.startsWith(staticCachePrefix))
-                    .map((key) => caches.delete(key))
-            )),
-    );
-});
-
-self.addEventListener('fetch', (event) => {
-  log("Fetch", event);
-
-  var config = {
-      staticCacheItems: [
-        '/images/lyza.gif',
-        '/css/styles.css',
-        '/js/site.js',
-        '/offline/',
-        '/',
-        '/prism-definitions.json'      
-        ],
-      cachePathPattern: /^\/(?:(20[0-9]{2}|about|blog|css|images|js)\/(.+)?)?$/
-    };
-
-    function shouldHandleFetch (event, opts) {
-      var request            = event.request;
-      var url                = new URL(request.url);
-      var criteria           = {
-        //matchesPathPattern: !!(opts.cachePathPattern.exec(url.pathname)) || opts.staticCacheItems.includes(url.pathname),
-        isGETRequest      : request.method === 'GET',
-        isFromMyOrigin    : url.origin === self.location.origin
-      };
-
-      log(`shouldHandleFetch() url.pathname=${url.pathname}`, criteria);
-    
-      // Create a new array with just the keys from criteria that have
-      // failing (i.e. false) values.
-      var failingCriteria    = Object.keys(criteria)
-        .filter(criteriaKey => !criteria[criteriaKey]);
-    
-      // If that failing array has any length, one or more tests failed.
-      return !failingCriteria.length;      
-    }
-  
-
-    function onFetch (event, opts) {
-      log("onFetch", event, opts);
-      var request      = event.request;
-      var acceptHeader = request.headers.get('Accept');
-      var resourceType = 'static';
-      var cacheKey;
-    
-      if (acceptHeader.indexOf('text/html') !== -1) {
-        resourceType = 'content';
-      } else if (acceptHeader.indexOf('image') !== -1) {
-        resourceType = 'image';
-      }
-    
-      // {String} [static|image|content]
-      cacheKey = resourceType;
-
-      log(`onFetch() resourceType=${resourceType}`);
-
-      // 1. Determine what kind of asset this is… (above).
-      if (resourceType === 'content') {
-        // Use a network-first strategy.
-        event.respondWith(
-          fetch(request)
-            .then(response => addToCache(cacheKey, request, response))
-            .catch(() => fetchFromCache(event))
-            .catch(() => offlineResponse(opts))
-        );
-      } else {
-        // Use a cache-first strategy.
-        event.respondWith(
-          fetchFromCache(event)
-            .catch(() => fetch(request))
-            .then(response => addToCache(cacheKey, request, response))
-            .catch(() => offlineResponse(resourceType, opts))
-          );
-      }
-    }
-
-    if (shouldHandleFetch(event, config)) {
-      onFetch(event, config);
-    } else {
-      log("load from network");
-    }
-        
-    /*
-    // Let the browser do its default thing
-    // for non-GET requests.
-    if (event.request.method !== 'GET') {
-        return;
-    }
-
-    event.respondWith(
-        caches.match(event.request)
-            .then((response) => {
-                return response || fetch(event.request);
-            }),
-    );
-    */
-});
-
-function addToCache (cacheKey, request, response) {
-  if (response.ok) {
-    var copy = response.clone();
-    caches.open(cacheKey).then( cache => {
-      cache.put(request, copy);
-    });
-    return response;
-  }
-}
-
-
-function fetchFromCache (event) {
-  return caches.match(event.request).then(response => {
-    if (!response) {
-      // A synchronous error that will kick off the catch handler
-      throw Error('${event.request.url} not found in cache');
-    }
-    return response;
+  var expectedCacheNames = Object.keys(CURRENT_CACHES).map(function(key) {
+      return CURRENT_CACHES[key];
   });
-}
 
+  // Delete out of date caches
+  event.waitUntil(
+      caches.keys().then(function(cacheNames) {
+          return Promise.all(
+              cacheNames.map(function(cacheName) {
+                  if (expectedCacheNames.indexOf(cacheName) == -1) {
+                      console.log('Deleting out of date cache:', cacheName);
+                      return caches.delete(cacheName);
+                  }
+              })
+          );
+      })
+  );
 
-function offlineResponse (resourceType, opts) {
-  if (resourceType === 'image') {
-    return new Response(opts.offlineImage,
-      { headers: { 'Content-Type': 'image/svg+xml' } }
-    );
-  } else if (resourceType === 'content') {
-    return caches.match(opts.offlinePage);
-  }
-  return undefined;
-}
-
-self.addEventListener('sync', (event) => {
-    log('Receive event with tag', event.tag);
-    if (event.tag !== TTRSS_ACTIONS_STORAGE_NAME) {
-        return;
-    }
-
-    log('Synching ttrss actions');
-
-    event.waitUntil(
-      syncActions()
-    );
+  console.log('Service Worker has been activated');  
 });
 
+self.addEventListener('fetch', function(event) {
+  console.log('Fetching:', event.request.url);  
+  event.respondWith(async function() {
+    const cachedResponse = await caches.match(event.request);
+    if (cachedResponse) {
+      console.log("\tCached version found: " + event.request.url);
+      return cachedResponse;
+    } else {        
+      console.log("\tGetting from the Internet:" + event.request.url);
+      return await fetchAndCache(event.request);
+    }
+  }());
+});
 
-function syncActions() {
-  //TODO: Add sync code here
- }
+async function fetchAndCache(request) {
+
+  try {
+    const response = await fetch(request);
+    // Check if we received a valid response
+    if (!response.ok) {
+      return response;
+      // throw Error(response.statusText);
+    }
+    var url = new URL(request.url);
+    if (response.status < 400 &&
+      response.type === 'basic' &&
+      url.search.indexOf("mode=nocache") == -1) {
+      var cur_cache;
+      if (response.headers.get('content-type') &&
+        response.headers.get('content-type').indexOf("application/javascript") >= 0) {
+        cur_cache = CURRENT_CACHES.js;
+      }
+      else if (response.headers.get('content-type') &&
+        response.headers.get('content-type').indexOf("text/css") >= 0) {
+        cur_cache = CURRENT_CACHES.css;
+      }
+      else if (response.headers.get('content-type') &&
+        response.headers.get('content-type').indexOf("font") >= 0) {
+        cur_cache = CURRENT_CACHES.font;
+      }
+      else if (response.headers.get('content-type') &&
+        response.headers.get('content-type').indexOf("image") >= 0) {
+        cur_cache = CURRENT_CACHES.image;
+      }
+      else if (response.headers.get('content-type') &&
+        response.headers.get('content-type').indexOf("text") >= 0) {
+        cur_cache = CURRENT_CACHES.site;
+      }
+      if (cur_cache) {
+        console.log('\tCaching the response to', request.url);
+        return caches.open(cur_cache).then(function (cache) {
+          cache.put(request, response.clone());
+          return response;
+        });
+      }
+    }
+    return response;
+  }
+  catch (error) {
+    console.log('Request failed for: ' + request.url, error);
+    throw error;
+  }
+}
