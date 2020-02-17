@@ -54,8 +54,8 @@ async function fetchAndCache(request) {
     const response = await fetch(request);
     // Check if we received a valid response
     if (!response.ok) {
-      return response;
-      // throw Error(response.statusText);
+      //return response;
+      throw Error(response.statusText);
     }
     var url = new URL(request.url);
     if (response.status < 400 &&
