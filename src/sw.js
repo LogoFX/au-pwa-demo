@@ -1,10 +1,12 @@
+const VERSION = "1.0.0";
+
 // Caches
 var CURRENT_CACHES = {
-  font: 'font-cache-v1',
-  css:'css-cache-v1',
-  js:'js-cache-v1',
-  site: 'site-cache-v1',
-  image: 'image-cache-v1'
+  font: `font-cache-v${VERSION}`,
+  css:`css-cache-v${VERSION}`,
+  js:`js-cache-v1${VERSION}`,
+  site: `site-cache-v1${VERSION}`,
+  image: `image-cache-v${VERSION}`,
 };
 
 self.addEventListener('install', (event) => {
@@ -54,8 +56,8 @@ async function fetchAndCache(request) {
     const response = await fetch(request);
     // Check if we received a valid response
     if (!response.ok) {
-      return response;
-      // throw Error(response.statusText);
+      //return response;
+      throw Error(response.statusText);
     }
     var url = new URL(request.url);
     if (response.status < 400 &&

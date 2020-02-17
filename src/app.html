@@ -5,11 +5,11 @@
     
 
   <aside class="mdc-drawer mdc-drawer--dismissible mdc-drawer--open" style="position: fixed">
-    <div class="mdc-drawer__header">
+    <!-- <div class="mdc-drawer__header">
       <h3 class="mdc-drawer__title">Mail</h3>
       <h6 class="mdc-drawer__subtitle">email@material.io</h6>
-      <!-- <span t="[html]friend">friend</span> -->
-    </div>
+    </div> -->
+    <h3 if.bind="!isOnline">Application is OFF LINE</h3>
     <div class="mdc-drawer__content">
       <nav class="mdc-list">
           <a repeat.for="nav of router.navigation" class="mdc-list-item ${nav.isActive ? 'mdc-list-item--activated' : ''}"  href.bind="nav.href" aria-current="page">
