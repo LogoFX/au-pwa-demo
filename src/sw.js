@@ -4,8 +4,8 @@ const VERSION = "1.0.0";
 var CURRENT_CACHES = {
   font: `font-cache-v${VERSION}`,
   css:`css-cache-v${VERSION}`,
-  js:`js-cache-v1${VERSION}`,
-  site: `site-cache-v1${VERSION}`,
+  js:`js-cache-v${VERSION}`,
+  site: `site-cache-v${VERSION}`,
   image: `image-cache-v${VERSION}`,
 };
 
