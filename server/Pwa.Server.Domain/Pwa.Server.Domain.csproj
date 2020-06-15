@@ -5,6 +5,10 @@
     <Configurations>DebugWithFake;Release</Configurations>
   </PropertyGroup>
 
+  <PropertyGroup>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+  </PropertyGroup>
+
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DebugWithFake|AnyCPU'">
     <OutputPath>..\bin\DebugWithFake</OutputPath>
     <DebugType>full</DebugType>

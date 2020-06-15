@@ -11,7 +11,8 @@ namespace Pwa.Server.Domain
         public void RegisterModule(IServiceCollection dependencyRegistrator)
         {
             dependencyRegistrator
-                .AddSingleton<IUsersService, UsersService>();
+                .AddSingleton<IUsersService, UsersService>()
+                .AddSingleton<IContactService, ContactService>();
         }
     }
 }
