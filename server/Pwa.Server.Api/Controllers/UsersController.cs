@@ -8,7 +8,7 @@ namespace Pwa.Server.Api.Controllers
     /// <summary>
     /// Users controller.
     /// </summary>
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     public class UsersController : Controller
     {
         private readonly IUsersService _usersService;
