@@ -5,4 +5,8 @@
     <Configurations>DebugWithFake;Release</Configurations>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Pwa.Server.Data.Contracts.Dto\Pwa.Server.Data.Contracts.Dto.csproj" />
+  </ItemGroup>
+
 </Project>

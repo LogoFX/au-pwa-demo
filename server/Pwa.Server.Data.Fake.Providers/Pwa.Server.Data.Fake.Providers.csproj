@@ -16,6 +16,8 @@
   <ItemGroup>
     <ProjectReference Include="..\Pwa.Server.Data.Contracts.Dto\Pwa.Server.Data.Contracts.Dto.csproj" />
     <ProjectReference Include="..\Pwa.Server.Data.Contracts.Providers\Pwa.Server.Data.Contracts.Providers.csproj" />
+    <ProjectReference Include="..\Pwa.Server.Data.Fake.Containers\Pwa.Server.Data.Fake.Containers.csproj" />
+    <ProjectReference Include="..\Pwa.Server.Data.Fake.ProviderBuilders\Pwa.Server.Data.Fake.ProviderBuilders.csproj" />
     <ProjectReference Include="..\Pwa.Server.Infra\Pwa.Server.Infra.csproj" />
   </ItemGroup>
 

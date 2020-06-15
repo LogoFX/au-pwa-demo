@@ -10,5 +10,21 @@ namespace Pwa.Server.Domain
         {
             return new User(userDto.Id, userDto.Username, userDto.Fullname);
         }
+
+        public static IContact ToEntity(this ContactDto contactDto)
+        {
+            return new Contact(contactDto.Id, contactDto.FirstName, contactDto.LastName, contactDto.EMail);
+        }
+
+        public static ContactDto ToDto(this IContact contact)
+        {
+            return new ContactDto
+            {
+                Id = contact.Id,
+                FirstName = contact.FirstName,
+                LastName = contact.LastName,
+                EMail = contact.EMail
+            };
+        }
     }
 }

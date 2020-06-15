@@ -11,6 +11,5 @@ namespace Pwa.Server.Data.Fake.ProviderBuilders
             FakeFactoryContext.Current = new FakeFactory();
             ConstraintFactoryContext.Current = new ConstraintFactory();
         }
-
     }
 }

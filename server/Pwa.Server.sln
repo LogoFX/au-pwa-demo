@@ -43,7 +43,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pwa.Server.Infra", "Pwa.Ser
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sdk", "Sdk", "{ED70E801-597A-4542-A210-870B9773D4E1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pwa.Server.Services.Sdk", "Pwa.Server.Services.Sdk\Pwa.Server.Services.Sdk.csproj", "{F8FB8F40-F2AA-4D1A-8F02-56F6451D3D9D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pwa.Server.Services.Sdk", "Pwa.Server.Services.Sdk\Pwa.Server.Services.Sdk.csproj", "{F8FB8F40-F2AA-4D1A-8F02-56F6451D3D9D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
