@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Attest.Fake.Builders" Version="2.0.0" />
+    <PackageReference Include="Attest.Fake.Moq" Version="2.0.0" />
+    <PackageReference Include="Solid.Practices.Modularity" Version="2.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Pwa.Server.Data.Contracts.Dto\Pwa.Server.Data.Contracts.Dto.csproj" />
+    <ProjectReference Include="..\Pwa.Server.Data.Contracts.Providers\Pwa.Server.Data.Contracts.Providers.csproj" />
+  </ItemGroup>
+
+</Project>

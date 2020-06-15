@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="RestSharp" Version="106.11.4" />
+    <PackageReference Include="Solid.Bootstrapping" Version="2.2.0" />
+    <PackageReference Include="Solid.Practices.Middleware" Version="2.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Pwa.Server.Data.Contracts.Providers\Pwa.Server.Data.Contracts.Providers.csproj" />
+    <ProjectReference Include="..\Pwa.Server.Infra\Pwa.Server.Infra.csproj" />
+  </ItemGroup>
+
+</Project>

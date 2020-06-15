@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Pwa.Server.Api</name>
+    </assembly>
+    <members>
+        <member name="T:Pwa.Server.Api.Controllers.UsersController">
+            <summary>
+            Users controller.
+            </summary>
+        </member>
+        <member name="M:Pwa.Server.Api.Controllers.UsersController.#ctor(Pwa.Server.Domain.Services.IUsersService)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Pwa.Server.Api.Controllers.UsersController"/> class.
+            </summary>
+            <param name="usersService">Users service.</param>
+        </member>
+        <member name="M:Pwa.Server.Api.Controllers.UsersController.Get">
+            <summary>
+            Gets all users.
+            </summary>
+            <returns>The list of users.</returns>
+        </member>
+        <member name="M:Pwa.Server.Api.Controllers.UsersController.GetByName(System.String)">
+            <summary>
+            Gets user by name.
+            </summary>
+            <returns>The user.</returns>
+        </member>
+        <member name="M:Pwa.Server.Api.Controllers.UsersController.Delete(System.String)">
+            <summary>
+            Deletes user by user name.
+            </summary>
+            <param name="username">User's name.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Pwa.Server.Api.Controllers.UsersController.Update(System.String,System.String)">
+            <summary>
+            Updates user's data'.
+            </summary>
+            <param name="username">User's name.</param>
+            <param name="fullname">New user's full name.'</param>
+            <returns></returns>
+        </member>
+        <member name="M:Pwa.Server.Api.Controllers.UsersController.Add(System.String,System.String)">
+            <summary>
+            Adds new user'.
+            </summary>
+            <param name="username">User's name.</param>
+            <param name="fullname">User's full name.'</param>
+            <returns>The list of users.</returns>
+        </member>
+        <member name="T:Pwa.Server.Api.Module">
+            <inheritdoc />
+        </member>
+        <member name="M:Pwa.Server.Api.Module.RegisterModule(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <inheritdoc />
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>C:\Projects\LogoFX\au-pwa-demo\server\Pwa.Server\Pwa.Server.Facade\Pwa.Server.Facade.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="JetBrains.Annotations" Version="2020.1.0" />
+    <PackageReference Include="LogoFX.Server.Bootstrapping" Version="2.1.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.4.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Pwa.Server.Api\Pwa.Server.Api.csproj" />
+    <ProjectReference Include="..\Pwa.Server.Data.Fake.ProviderBuilders\Pwa.Server.Data.Fake.ProviderBuilders.csproj" />
+    <ProjectReference Include="..\Pwa.Server.Data.Fake.Providers\Pwa.Server.Data.Fake.Providers.csproj" />
+    <ProjectReference Include="..\Pwa.Server.Services.Sdk\Pwa.Server.Services.Sdk.csproj" />
+  </ItemGroup>
+
+</Project>

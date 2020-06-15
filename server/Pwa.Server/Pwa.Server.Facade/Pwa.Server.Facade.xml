@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Pwa.Server.Facade</name>
+    </assembly>
+    <members>
+        <member name="T:Pwa.Server.Facade.Program">
+            <summary>
+            Entry point for the program
+            </summary>
+        </member>
+        <member name="M:Pwa.Server.Facade.Program.Main(System.String[])">
+            <summary>
+            The entry point of the program, where the program control starts and ends.
+            </summary>
+            <param name="args">The command-line arguments.</param>
+        </member>
+        <member name="M:Pwa.Server.Facade.Program.BuildWebHost(System.String[])">
+            <summary>
+            Builds the web host.
+            </summary>
+            <returns>The web host.</returns>
+            <param name="args">Arguments.</param>
+        </member>
+    </members>
+</doc>
