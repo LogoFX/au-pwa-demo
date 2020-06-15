@@ -1,0 +1,41 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <Configurations>DebugWithFake;Release</Configurations>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+  </PropertyGroup>
+  
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile></DocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DebugWithFake|AnyCPU'">
+    <DocumentationFile>..\bin\DebugWithFake\Pwa.Server.Facade.xml</DocumentationFile>
+    <OutputPath>..\bin\DebugWithFake</OutputPath>
+    <DebugType>full</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AspNet.Security.OpenIdConnect.Server" Version="2.0.0" />
+    <PackageReference Include="JetBrains.Annotations" Version="2019.1.3" />
+    <PackageReference Include="LogoFX.Server.Bootstrapping" Version="2.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Cors" Version="2.2.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="2.2.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="4.0.1" />
+    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUi" Version="4.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Pwa.Server.Api\Pwa.Server.Api.csproj" />
+    <ProjectReference Include="..\Pwa.Server.Data.Fake.ProviderBuilders\Pwa.Server.Data.Fake.ProviderBuilders.csproj" />
+    <ProjectReference Include="..\Pwa.Server.Data.Fake.Providers\Pwa.Server.Data.Fake.Providers.csproj" />
+    <ProjectReference Include="..\Pwa.Server.Services.Sdk\Pwa.Server.Services.Sdk.csproj" />
+  </ItemGroup>
+
+</Project>

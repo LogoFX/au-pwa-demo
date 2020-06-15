@@ -1,0 +1,13 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <Configurations>DebugWithFake;Release</Configurations>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Pwa.Server.Data.Contracts.Providers\Pwa.Server.Data.Contracts.Providers.csproj" />
+    <ProjectReference Include="..\Pwa.Server.Infra\Pwa.Server.Infra.csproj" />
+  </ItemGroup>
+
+</Project>
