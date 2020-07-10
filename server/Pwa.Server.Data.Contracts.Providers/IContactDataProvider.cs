@@ -8,6 +8,8 @@ namespace Pwa.Server.Data.Contracts.Providers
     {
         IEnumerable<ContactDto> GetItems();
 
+        ContactDto GetItem(Guid id);
+
         bool DeleteItem(Guid id);
 
         bool UpdateItem(ContactDto dto);

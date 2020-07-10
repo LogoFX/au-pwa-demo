@@ -1,9 +1,10 @@
 ﻿using System;
+using LogoFX.Client.Core;
 using Pwa.Server.Domain.Entities.Contracts;
 
 namespace Pwa.Server.Domain.Entities
 {
-    public abstract class EntityBase : IEntity
+    public abstract class EntityBase : NotifyPropertyChangedBase<EntityBase>, IEntity
     {
         protected EntityBase(Guid id, string name)
         {
@@ -13,6 +14,12 @@ namespace Pwa.Server.Domain.Entities
 
         public Guid Id { get; }
 
-        public string Name { get; set; }
+        private string _name;
+
+        public string Name
+        {
+            get => _name;
+            protected set => SetProperty(ref _name, value);
+        }
     }
 }

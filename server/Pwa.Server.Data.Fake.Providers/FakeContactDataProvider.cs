@@ -29,6 +29,12 @@ namespace Pwa.Server.Data.Fake.Providers
             return r;
         }).GetItems();
 
+        public ContactDto GetItem(Guid id) => GetService(r =>
+        {
+            Task.Delay(_random.Next(2000)).Wait();
+            return r;
+        }).GetItem(id);
+
         bool IContactDataProvider.DeleteItem(Guid id) => GetService(r =>
         {
             Task.Delay(_random.Next(2000)).Wait();

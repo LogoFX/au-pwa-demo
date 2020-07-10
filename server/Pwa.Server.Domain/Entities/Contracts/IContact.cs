@@ -4,10 +4,10 @@
     {
         bool IsNew { get; }
 
-        string FirstName { get; }
+        string FirstName { get; set; }
 
-        string LastName { get; }
+        string LastName { get; set; }
 
-        string EMail { get; }
+        string EMail { get; set; }
     }
 }

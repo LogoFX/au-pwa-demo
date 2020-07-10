@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using JetBrains.Annotations;
 using LogoFX.Client.Core;
-using LogoFX.Core;
 using Pwa.Server.Data.Contracts.Providers;
 using Pwa.Server.Domain.Entities;
 using Pwa.Server.Domain.Entities.Contracts;
@@ -12,15 +12,15 @@ namespace Pwa.Server.Domain.Services
 {
     public interface IContactService
     {
-        IEnumerable<IContact> Items { get; }
+        Task<IEnumerable<IContact>> GetItems();
 
-        Task GetItems();
+        Task<IContact> GetItem(Guid id);
 
         Task<IContact> NewItem();
 
         Task SaveItem(IContact item);
 
-        Task DeleteItem(IContact item);
+        Task<bool> DeleteItem(IContact item);
     }
 
     [UsedImplicitly]
@@ -28,24 +28,18 @@ namespace Pwa.Server.Domain.Services
     {
         private readonly IContactDataProvider _provider;
 
-        private readonly RangeObservableCollection<IContact> _items =
-            new RangeObservableCollection<IContact>();
-
         public ContactService(IContactDataProvider provider)
         {
             _provider = provider;
         }
 
-        private void GetItems()
-        {
-            var items = _provider.GetItems().Select(x => x.ToEntity());
-            _items.Clear();
-            _items.AddRange(items);
-        }
+        private IEnumerable<IContact> GetItems() => _provider.GetItems().Select(x => x.ToEntity());
 
-        IEnumerable<IContact> IContactService.Items => _items;
+        private IContact GetItem(Guid id) => _provider.GetItem(id).ToEntity();
 
-        Task IContactService.GetItems() => MethodRunner.RunAsync(GetItems);
+        Task<IContact> IContactService.GetItem(Guid id) => MethodRunner.RunWithResultAsync(() => GetItem(id));
+
+        Task<IEnumerable<IContact>> IContactService.GetItems() => MethodRunner.RunWithResultAsync(GetItems);
 
         Task<IContact> IContactService.NewItem() => MethodRunner.RunWithResultAsync<IContact>(() => new Contact());
 
@@ -63,10 +57,6 @@ namespace Pwa.Server.Domain.Services
             }
         });
 
-        Task IContactService.DeleteItem(IContact item) => MethodRunner.RunAsync(() =>
-        {
-            _provider.DeleteItem(item.Id);
-            _items.Remove(item);
-        });
+        Task<bool> IContactService.DeleteItem(IContact item) => MethodRunner.RunWithResultAsync(() => _provider.DeleteItem(item.Id));
     }
 }

@@ -29,6 +29,8 @@ namespace Pwa.Server.Data.Fake.ProviderBuilders
             IHaveNoMethods<IContactDataProvider> serviceCallTemplate) => serviceCallTemplate
             .AddMethodCallWithResult(t => t.GetItems(),
                 r => r.Complete(GetItems))
+            .AddMethodCallWithResult<Guid, ContactDto>(t => t.GetItem(It.IsAny<Guid>()),
+                (r, id) => r.Complete(GetItem(id)))
             .AddMethodCallWithResult<Guid, bool>(t => t.DeleteItem(It.IsAny<Guid>()),
                 (r, id) => r.Complete(DeleteItem(id)))
             .AddMethodCallWithResult<ContactDto, bool>(t => t.UpdateItem(It.IsAny<ContactDto>()),
@@ -39,6 +41,8 @@ namespace Pwa.Server.Data.Fake.ProviderBuilders
                 }))
             .AddMethodCall<ContactDto>(t => t.CreateItem(It.IsAny<ContactDto>()),
                 (r, dto) => r.Complete(SaveItem));
+
+        private ContactDto GetItem(Guid id) => _itemsStorage.Find(x => x.Id == id);
 
         private IEnumerable<ContactDto> GetItems() => _itemsStorage;
 
@@ -51,10 +55,12 @@ namespace Pwa.Server.Data.Fake.ProviderBuilders
         private void SaveItem(ContactDto dto)
         {
             var oldDto = _itemsStorage.SingleOrDefault(x => x.Id == dto.Id);
-            if (oldDto == null)
+            if (oldDto != null)
             {
-                _itemsStorage.Add(dto);
+                _itemsStorage.Remove(oldDto);
             }
+
+            _itemsStorage.Add(dto);
         }
     }
 }

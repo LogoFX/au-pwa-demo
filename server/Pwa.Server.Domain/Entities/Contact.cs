@@ -21,10 +21,26 @@ namespace Pwa.Server.Domain.Entities
 
         public bool IsNew { get; }
 
-        public string FirstName => Name;
+        public string FirstName
+        {
+            get => Name;
+            set => Name = value;
+        }
 
-        public string LastName { get; }
+        private string _lastName;
 
-        public string EMail { get; }
+        public string LastName
+        {
+            get => _lastName;
+            set => SetProperty(ref _lastName, value);
+        }
+
+        private string _eMail;
+
+        public string EMail
+        {
+            get => _eMail;
+            set => SetProperty(ref _eMail, value);
+        }
     }
 }
