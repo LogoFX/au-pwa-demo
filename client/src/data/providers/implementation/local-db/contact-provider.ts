@@ -1,4 +1,4 @@
-import { IContactProvider, ContactDto, DB_NAME } from 'data';
+import { IContactProvider, ContactDto, DB_CONTACTS } from 'data';
 
 // tslint:disable: variable-name
 // tslint:disable: no-var-requires
@@ -14,7 +14,7 @@ public async getAsync(id?: string): Promise<ContactDto[]> {
 
     const contacts: ContactDto[] = [];
 
-    const db = new PouchDB(DB_NAME);
+    const db = new PouchDB(DB_CONTACTS);
 
     if (id) {
       await db.get(id)
@@ -52,7 +52,7 @@ public async getAsync(id?: string): Promise<ContactDto[]> {
   }
 
   public async postAsync(contactDto: ContactDto): Promise<void> {
-    const db = new PouchDB(DB_NAME);
+    const db = new PouchDB(DB_CONTACTS);
     await db.put({
       _id: contactDto.id,
       id: contactDto.id,
@@ -66,7 +66,7 @@ public async getAsync(id?: string): Promise<ContactDto[]> {
   }
 
   public async putAsync(contactDto: ContactDto): Promise<void> {
-    const db = new PouchDB(DB_NAME);
+    const db = new PouchDB(DB_CONTACTS);
 
     await db.get(contactDto.id).then(doc => {
       db.put({
@@ -84,7 +84,7 @@ public async getAsync(id?: string): Promise<ContactDto[]> {
   }
 
   public async deleteAsync(id : string): Promise<void> {
-    const db = new PouchDB(DB_NAME);
+    const db = new PouchDB(DB_CONTACTS);
     await db.get(id).then(doc => {
       db.remove(doc);
     });

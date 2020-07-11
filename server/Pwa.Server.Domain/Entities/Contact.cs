@@ -5,8 +5,8 @@ namespace Pwa.Server.Domain.Entities
 {
     internal class Contact : EntityBase, IContact
     {
-        public Contact()
-            : base(Guid.NewGuid(), string.Empty)
+        public Contact(Guid? id = null)
+            : base(id ?? Guid.NewGuid(), string.Empty)
         {
             IsNew = true;
         }

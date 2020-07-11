@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
+using JetBrains.Annotations;
 using Microsoft.AspNetCore.Mvc;
 using Pwa.Server.Domain.Services;
 
@@ -70,19 +72,19 @@ namespace Pwa.Server.Api.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpPut]
-        public async Task<IActionResult> Update(Guid id, string firstName, string lastName, string email)
+        public async Task<IActionResult> Update([FromBody] ContactObject contactObject)
         {
             try
             {
-                var contact = await _contactsService.GetItem(id);
+                var contact = await _contactsService.GetItem(contactObject.id);
                 if (contact == null)
                 {
-                    return NotFound($"Contact with ID={id} not found.");
+                    return NotFound($"Contact with ID={contactObject.id} not found.");
                 }
 
-                contact.FirstName = firstName;
-                contact.LastName = lastName;
-                contact.EMail = email;
+                contact.FirstName = contactObject.firstName;
+                contact.LastName = contactObject.lastName;
+                contact.EMail = contactObject.email;
                 await _contactsService.SaveItem(contact);
 
                 return Ok();
@@ -98,14 +100,14 @@ namespace Pwa.Server.Api.Controllers
         /// </summary>
         /// <returns>The list of users.</returns>
         [HttpPost]
-        public async Task<IActionResult> Add(string firstName, string lastName, string email)
+        public async Task<IActionResult> Add([FromBody] ContactObject contactObject)
         {
             try
             {
-                var contact = await _contactsService.NewItem();
-                contact.FirstName = firstName;
-                contact.LastName = lastName;
-                contact.EMail = email;
+                var contact = await _contactsService.NewItem(contactObject.id);
+                contact.FirstName = contactObject.firstName;
+                contact.LastName = contactObject.lastName;
+                contact.EMail = contactObject.email;
                 await _contactsService.SaveItem(contact);
 
                 return Ok();
@@ -116,5 +118,31 @@ namespace Pwa.Server.Api.Controllers
             }
         }
 
+        /// <summary>
+        /// Object to client-server interchange
+        /// </summary>
+        [SuppressMessage("ReSharper", "InconsistentNaming")]
+        public sealed class ContactObject
+        {
+            /// <summary>
+            /// The contact's ID
+            /// </summary>
+            public Guid id { get; [UsedImplicitly] set; }
+            
+            /// <summary>
+            /// Contact's first name
+            /// </summary>
+            public string firstName { get; [UsedImplicitly] set; }
+            
+            /// <summary>
+            /// Contact's last name
+            /// </summary>
+            public string lastName { get; [UsedImplicitly] set; }
+            
+            /// <summary>
+            /// Contact's e-mail
+            /// </summary>
+            public string email { get; [UsedImplicitly] set; }
+        }
     }
 }

@@ -16,7 +16,7 @@ namespace Pwa.Server.Domain.Services
 
         Task<IContact> GetItem(Guid id);
 
-        Task<IContact> NewItem();
+        Task<IContact> NewItem(Guid? id);
 
         Task SaveItem(IContact item);
 
@@ -41,7 +41,7 @@ namespace Pwa.Server.Domain.Services
 
         Task<IEnumerable<IContact>> IContactService.GetItems() => MethodRunner.RunWithResultAsync(GetItems);
 
-        Task<IContact> IContactService.NewItem() => MethodRunner.RunWithResultAsync<IContact>(() => new Contact());
+        Task<IContact> IContactService.NewItem(Guid? id) => MethodRunner.RunWithResultAsync<IContact>(() => new Contact(id));
 
         Task IContactService.SaveItem(IContact item) => MethodRunner.RunAsync(() =>
         {
