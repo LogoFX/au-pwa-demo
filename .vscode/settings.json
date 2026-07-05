@@ -1,1 +1,4 @@
-{}
+{
+  "codeQL.githubDatabase.download": "never",
+  "i18next.i18nPaths": "/Users/me/Documents/GitHub/logofx/au-pwa-demo/src/locales"
+}
